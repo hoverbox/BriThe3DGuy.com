@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Bri The 3D Guy</title>
+  <meta name="description" content="About Brian — 3D artist, game dev enthusiast, and educator behind Bri The 3D Guy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .about-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-sidebar { position: sticky; top: 7rem; }
+
+    .avatar-box {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, #1e1e2e, #0d0d18);
+      border: 1px solid var(--brand-card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      opacity: 0.2;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    /* REPLACE .avatar-box content with your photo:
+       <img src="images/bri.jpg" alt="Brian" style="width:100%;height:100%;object-fit:cover;opacity:1"> */
+
+    .avatar-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .avatar-title {
+      color: var(--brand-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--brand-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+
+    .social-link:hover {
+      border-color: var(--brand-card-border);
+      color: var(--brand-text);
+      background: var(--brand-card);
+    }
+
+    .social-icon { font-size: 1.1rem; }
+
+    /* About content */
+    .about-content h2 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    .about-content h2:first-child { margin-top: 0; }
+
+    .about-content p {
+      color: var(--brand-muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .about-content p strong {
+      color: var(--brand-text);
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: var(--brand-card);
+      border: 1px solid var(--brand-card-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-card .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--brand-primary);
+    }
+
+    .stat-card .stat-label {
+      color: var(--brand-muted);
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Contact form */
+    .contact-form {
+      background: var(--brand-card);
+      border: 1px solid var(--brand-card-border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--brand-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--brand-card-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--brand-text);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: rgba(255,87,34,0.5); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--brand-muted); }
+
+    @media (max-width: 900px) {
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .about-sidebar { position: static; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Bri The <span>3D</span> Guy</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="topics.html">Topics</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="progress.html">⚡ Progress</a></li>
+      <li><a href="about.html#newsletter" class="nav-cta">Stay Updated</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <section style="padding-top:9rem;">
+    <div class="container">
+      <div class="about-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="about-sidebar">
+          <div class="avatar-box">🎮</div>
+          <!-- REPLACE above with: <img src="images/bri.jpg" ...> -->
+
+          <div class="avatar-name">Brian</div>
+          <div class="avatar-title">3D Artist &amp; Educator</div>
+
+          <!-- EDIT: Your social links -->
+          <div class="social-links">
+            <a href="#" target="_blank" class="social-link">
+              <span class="social-icon">▶</span> YouTube
+            </a>
+            <a href="#" target="_blank" class="social-link">
+              <span class="social-icon">𝕏</span> Twitter / X
+            </a>
+            <a href="#" target="_blank" class="social-link">
+              <span class="social-icon">💬</span> Discord Server
+            </a>
+            <a href="#" target="_blank" class="social-link">
+              <span class="social-icon">🐙</span> GitHub
+            </a>
+          </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="about-content">
+          <span class="section-label">Hey there</span>
+
+          <!-- EDIT: Your full bio — as long or short as you like -->
+          <h2>I'm Bri — short for Brian.</h2>
+          <p>
+            I'm a 3D artist and game development enthusiast who got tired of tutorials 
+            that skip steps, drown you in jargon, and assume you already know half the stuff 
+            they're supposed to be teaching. So I started making my own.
+          </p>
+          <p>
+            This site is for <strong>beginners and intermediate learners</strong> who want to 
+            make cool 3D things and eventually ship games — without having to decode academic 
+            documentation or watch 4-hour videos just to find the one part they needed.
+          </p>
+
+          <h2>What we cover here</h2>
+          <p>
+            Everything on this site is built around two tools: <strong>Blender</strong> for 3D 
+            creation and <strong>Godot Engine 4</strong> for game development. Both are completely 
+            free and open-source, which means no barriers to getting started.
+          </p>
+          <p>
+            We start at the beginning — like actually the beginning — and build up from there. 
+            Whether it's your first time touching a 3D app or you're trying to finally crack 
+            GDScript, there's something here for you.
+          </p>
+
+          <h2>By the numbers</h2>
+          <div class="stats-grid">
+            <!-- EDIT: Your stats -->
+            <div class="stat-card">
+              <div class="stat-num">50+</div>
+              <div class="stat-label">Free Tutorials</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">10K+</div>
+              <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">5 yrs</div>
+              <div class="stat-label">Teaching</div>
+            </div>
+          </div>
+
+          <!-- NEWSLETTER -->
+          <div id="newsletter" style="margin-top:3rem;">
+            <h2>Stay in the loop</h2>
+            <p>New tutorials go up regularly. Subscribe and I'll let you know — no spam, just content.</p>
+            <div class="newsletter-inner" style="margin-top:1.5rem; padding:2.5rem;">
+              <form class="newsletter-form" style="margin-top:0;" onsubmit="handleSubscribe(event)">
+                <input type="email" placeholder="your@email.com" required />
+                <button type="submit" class="btn-primary">Subscribe</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- CONTACT -->
+          <div style="margin-top:4rem;">
+            <h2>Get in touch</h2>
+            <p>Have a question, tutorial request, or just want to say hey? Fill this out.</p>
+            <div class="contact-form" style="margin-top:1.5rem;">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="Your name" />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="your@email.com" />
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea rows="5" placeholder="What's on your mind?"></textarea>
+              </div>
+              <!-- TODO: wire this up to Formspree, EmailJS, or similar free service -->
+              <button class="btn-primary" onclick="alert('Contact form coming soon! For now, reach me on Discord or YouTube.')">
+                Send Message
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">Bri The <span>3D</span> Guy</a>
+    <ul class="footer-links">
+      <li><a href="#" target="_blank">YouTube</a></li>
+      <li><a href="#" target="_blank">Twitter / X</a></li>
+      <li><a href="#" target="_blank">Discord</a></li>
+      <li><a href="about.html">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2025 Bri The 3D Guy. All rights reserved.</span>
+  </footer>
+
+  <script src="js/xp.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

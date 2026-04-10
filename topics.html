@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topics — Bri The 3D Guy</title>
+  <meta name="description" content="Browse all 3D graphics and Godot learning paths — from total beginner to intermediate." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .path-section { margin-bottom: 5rem; }
+
+    .path-section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--brand-card-border);
+    }
+
+    .path-section-icon { font-size: 2rem; }
+
+    .path-section-title {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .path-section-desc {
+      color: var(--brand-muted);
+      font-size: 0.9rem;
+      margin-top: 0.15rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Bri The <span>3D</span> Guy</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="topics.html">Topics</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="progress.html">⚡ Progress</a></li>
+      <li><a href="about.html#newsletter" class="nav-cta">Stay Updated</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-glow"></div>
+    <span class="section-label">Learning Paths</span>
+    <h1>Pick Your <span>Topic</span></h1>
+    <p>Everything is organized by subject so you can jump straight to what you need.</p>
+  </div>
+
+  <section style="padding-top:2rem;">
+    <div class="container">
+
+      <!-- ============================================================
+           TOPIC GROUP — 3D Modeling & Blender
+           To add a new topic card: copy a .topic-card block
+      ============================================================ -->
+      <div class="path-section">
+        <div class="path-section-header">
+          <span class="path-section-icon">🧊</span>
+          <div>
+            <div class="path-section-title">3D Modeling &amp; Blender</div>
+            <div class="path-section-desc">The foundation. Learn to build anything in 3D.</div>
+          </div>
+        </div>
+        <div class="topics-grid">
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🧊</span>
+            <div class="topic-name">3D Modeling Basics</div>
+            <p class="topic-desc">Vertices, edges, faces, and how to shape your first 3D objects in Blender from scratch.</p>
+            <span class="topic-level beginner">Beginner</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🎨</span>
+            <div class="topic-name">Texturing &amp; Materials</div>
+            <p class="topic-desc">UV unwrapping, PBR materials, and texture painting — then importing them into Godot.</p>
+            <span class="topic-level intermediate">Intermediate</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🦴</span>
+            <div class="topic-name">Rigging &amp; Animation</div>
+            <p class="topic-desc">Build armatures, weight paint, and animate characters for use in Godot's AnimationPlayer.</p>
+            <span class="topic-level intermediate">Intermediate</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">💡</span>
+            <div class="topic-name">Lighting for Game Assets</div>
+            <p class="topic-desc">Light your models for great renders and understand how lighting translates to Godot.</p>
+            <span class="topic-level intermediate">Intermediate</span>
+          </a>
+
+          <!-- ADD MORE BLENDER TOPICS HERE -->
+
+        </div>
+      </div>
+
+      <!-- ============================================================
+           TOPIC GROUP — Godot Engine
+      ============================================================ -->
+      <div class="path-section">
+        <div class="path-section-header">
+          <span class="path-section-icon">🕹️</span>
+          <div>
+            <div class="path-section-title">Godot Engine</div>
+            <div class="path-section-desc">Where your 3D art becomes a playable game.</div>
+          </div>
+        </div>
+        <div class="topics-grid">
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🕹️</span>
+            <div class="topic-name">Godot for Beginners</div>
+            <p class="topic-desc">The Godot editor, scene tree, nodes, and how everything fits together. Start here.</p>
+            <span class="topic-level beginner">Beginner</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">📝</span>
+            <div class="topic-name">GDScript Fundamentals</div>
+            <p class="topic-desc">Godot's built-in scripting language — variables, functions, signals, and more.</p>
+            <span class="topic-level beginner">Beginner</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">⚙️</span>
+            <div class="topic-name">Physics &amp; Gameplay</div>
+            <p class="topic-desc">CharacterBody3D, collision shapes, movement — turning your scene into an actual game.</p>
+            <span class="topic-level intermediate">Intermediate</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🔷</span>
+            <div class="topic-name">Godot Shaders</div>
+            <p class="topic-desc">Write custom shaders in Godot's shading language for effects you can't get any other way.</p>
+            <span class="topic-level intermediate">Intermediate</span>
+          </a>
+
+          <!-- ADD MORE GODOT TOPICS HERE -->
+
+        </div>
+      </div>
+
+      <!-- ============================================================
+           TOPIC GROUP — Blender to Godot Pipeline
+      ============================================================ -->
+      <div class="path-section">
+        <div class="path-section-header">
+          <span class="path-section-icon">🚀</span>
+          <div>
+            <div class="path-section-title">Blender → Godot Pipeline</div>
+            <div class="path-section-desc">Get your art into the engine without the headaches.</div>
+          </div>
+        </div>
+        <div class="topics-grid">
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🚀</span>
+            <div class="topic-name">Export &amp; Import Basics</div>
+            <p class="topic-desc">glTF vs FBX, scale issues, and the cleanest way to move files between apps.</p>
+            <span class="topic-level all">All Levels</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🎬</span>
+            <div class="topic-name">Animations in the Pipeline</div>
+            <p class="topic-desc">Export animations from Blender and control them properly inside Godot's AnimationTree.</p>
+            <span class="topic-level intermediate">Intermediate</span>
+          </a>
+
+          <a href="tutorials.html" class="topic-card">
+            <span class="topic-icon">🖼️</span>
+            <div class="topic-name">Material &amp; Texture Transfer</div>
+            <p class="topic-desc">Making sure your PBR materials survive the trip from Blender to Godot in one piece.</p>
+            <span class="topic-level all">All Levels</span>
+          </a>
+
+          <!-- ADD MORE PIPELINE TOPICS HERE -->
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">Bri The <span>3D</span> Guy</a>
+    <ul class="footer-links">
+      <li><a href="#" target="_blank">YouTube</a></li>
+      <li><a href="#" target="_blank">Twitter / X</a></li>
+      <li><a href="#" target="_blank">Discord</a></li>
+      <li><a href="about.html">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2025 Bri The 3D Guy. All rights reserved.</span>
+  </footer>
+
+  <script src="js/xp.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

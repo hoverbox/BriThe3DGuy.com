@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Progress — Bri The 3D Guy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Bri The <span>3D</span> Guy</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="topics.html">Topics</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="about.html#newsletter" class="nav-cta">Stay Updated</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PROGRESS HERO — filled dynamically -->
+  <div class="progress-hero">
+    <div class="page-hero-glow"></div>
+    <span id="prog-badge" class="progress-rank-badge">🌀</span>
+    <div id="prog-rank" class="progress-rank-title">Loading...</div>
+    <div id="prog-xp" class="progress-xp-count">0 XP total</div>
+    <div class="progress-bar-wrap">
+      <div id="prog-bar" class="progress-bar-fill" style="width:0%"></div>
+    </div>
+    <div id="prog-bar-label" class="progress-bar-label"></div>
+
+    <div class="progress-stats">
+      <div class="progress-stat">
+        <div class="progress-stat-num" id="prog-total-xp">0</div>
+        <div class="progress-stat-label">Total XP</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-num" id="prog-completed">0</div>
+        <div class="progress-stat-label">Tutorials Done</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-num" id="prog-rank-num">1</div>
+        <div class="progress-stat-label">Current Rank</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RANK LADDER -->
+  <section style="padding-top:1rem;">
+    <div class="container">
+      <span class="section-label">Rank Ladder</span>
+      <h2 class="section-title" style="margin-bottom:2rem;">All Ranks</h2>
+      <div class="rank-ladder" id="rank-ladder">
+        <!-- filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPLETED TUTORIALS -->
+  <section class="section-dark">
+    <div class="container">
+      <span class="section-label">History</span>
+      <h2 class="section-title" style="margin-bottom:2rem;">Completed Tutorials</h2>
+      <div class="completed-list" id="completed-list">
+        <!-- filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- RESET (tucked away at the bottom) -->
+  <section style="padding:2rem; text-align:center;">
+    <div class="container">
+      <p style="color:var(--brand-muted); font-size:0.85rem; margin-bottom:0.75rem;">
+        Progress is saved in your browser. Clearing your browser data will reset it.
+      </p>
+      <button onclick="confirmReset()" style="background:transparent; border:1px solid rgba(255,255,255,0.1); color:var(--brand-muted); padding:0.4rem 1rem; border-radius:50px; cursor:pointer; font-size:0.8rem; font-family:var(--font-body);">
+        Reset My Progress
+      </button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">Bri The <span>3D</span> Guy</a>
+    <ul class="footer-links">
+      <li><a href="#" target="_blank">YouTube</a></li>
+      <li><a href="#" target="_blank">Twitter / X</a></li>
+      <li><a href="#" target="_blank">Discord</a></li>
+      <li><a href="about.html">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2025 Bri The 3D Guy. All rights reserved.</span>
+  </footer>
+
+  <script src="js/xp.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  // ---- Tutorial name lookup (mirrors tutorials.html cards) ----
+  // Add an entry here for every tutorial on the site so the
+  // completed list shows a readable name instead of an ID.
+  const TUTORIAL_NAMES = {
+    'godot-beginner-3d':        { name: 'Build Your First 3D Game in Godot', difficulty: 'beginner' },
+    'godot-shader-intro':       { name: 'Write Your First Custom Shader in Godot 4', difficulty: 'intermediate' },
+    'blender-godot-export':     { name: 'Export From Blender to Godot 4', difficulty: 'intermediate' },
+    'blender-rigging-intro':    { name: 'Rigging Your First Character in Blender', difficulty: 'intermediate' },
+    'godot-physics-character':  { name: 'Godot Physics: CharacterBody3D', difficulty: 'intermediate' },
+    'blender-uv-unwrap':        { name: 'UV Unwrapping in Blender', difficulty: 'beginner' },
+    // ADD NEW TUTORIALS HERE as you publish them
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const data     = loadProgress();
+    const rank     = getRankForXP(data.xp);
+    const progress = getXPProgress(data.xp);
+    const rankIdx  = RANKS.indexOf(rank);
+
+    // Hero
+    document.getElementById('prog-badge').textContent      = rank.badge;
+    document.getElementById('prog-rank').textContent       = rank.title;
+    document.getElementById('prog-rank').style.color       = rank.color;
+    document.getElementById('prog-xp').textContent         = `${data.xp} XP total`;
+    document.getElementById('prog-bar').style.width        = progress.pct + '%';
+    document.getElementById('prog-bar').style.background   = rank.color;
+    document.getElementById('prog-bar-label').textContent  = progress.label;
+    document.getElementById('prog-total-xp').textContent   = data.xp;
+    document.getElementById('prog-completed').textContent  = data.completed.length;
+    document.getElementById('prog-rank-num').textContent   = rankIdx + 1;
+
+    // Rank ladder
+    const ladder = document.getElementById('rank-ladder');
+    RANKS.forEach((r, i) => {
+      const unlocked = data.xp >= r.minXP;
+      const current  = i === rankIdx;
+      const row      = document.createElement('div');
+      row.className  = 'rank-row ' + (current ? 'rank-current' : unlocked ? 'rank-unlocked' : 'rank-locked');
+      row.innerHTML  = `
+        <span class="rank-row-badge">${r.badge}</span>
+        <div class="rank-row-info">
+          <div class="rank-row-title" style="color:${current || unlocked ? r.color : 'var(--brand-muted)'}">
+            ${r.title}
+          </div>
+          <div class="rank-row-desc">${r.desc}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
+          <span class="rank-row-xp">${r.minXP} XP</span>
+          <span class="rank-status-badge ${current ? 'rank-status-current' : unlocked ? 'rank-status-done' : 'rank-status-locked'}">
+            ${current ? 'Current' : unlocked ? '✓ Unlocked' : 'Locked'}
+          </span>
+        </div>
+      `;
+      ladder.appendChild(row);
+    });
+
+    // Completed tutorials list
+    const list = document.getElementById('completed-list');
+    if (data.completed.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <span class="empty-icon">🎮</span>
+          <p>No tutorials completed yet.</p>
+          <p style="margin-top:0.5rem"><a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;">Start one now →</a></p>
+        </div>`;
+    } else {
+      data.completed.forEach(id => {
+        const info   = TUTORIAL_NAMES[id] || { name: id, difficulty: 'beginner' };
+        const xp     = XP_VALUES[info.difficulty] || 50;
+        const item   = document.createElement('div');
+        item.className = 'completed-item';
+        item.innerHTML = `
+          <span class="completed-check">✓</span>
+          <span class="completed-name">${info.name}</span>
+          <span class="completed-xp">+${xp} XP</span>
+        `;
+        list.appendChild(item);
+      });
+    }
+  });
+
+  function confirmReset() {
+    if (confirm('Reset all your XP and progress? This cannot be undone.')) {
+      localStorage.removeItem('bri3d_progress');
+      location.reload();
+    }
+  }
+  </script>
+</body>
+</html>
