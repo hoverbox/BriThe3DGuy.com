@@ -1020,3 +1020,263 @@ footer {
   #nav-xp-widget .nav-xp-rank { max-width: 80px; }
   #nav-xp-widget .nav-xp-bar-wrap { width: 60px; }
 }
+
+/* ============================================================
+   LEVEL-UP FULL SCREEN OVERLAY
+============================================================ */
+#levelup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 5, 10, 0.92);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#levelup-overlay.levelup-show { opacity: 1; }
+
+#levelup-overlay.levelup-out {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.levelup-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.levelup-particle {
+  position: absolute;
+  bottom: -20px;
+  border-radius: 50%;
+  animation: particle-rise linear forwards;
+  opacity: 0;
+}
+
+@keyframes particle-rise {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { transform: translateY(-110vh) rotate(720deg); opacity: 0; }
+}
+
+.levelup-card {
+  position: relative;
+  background: #13131C;
+  border: 1px solid rgba(255, 214, 0, 0.3);
+  border-radius: 28px;
+  padding: 3.5rem 4rem;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+  overflow: hidden;
+  animation: card-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes card-pop {
+  from { transform: scale(0.7) translateY(30px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.levelup-glow {
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.12; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.22; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+.levelup-label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: var(--brand-yellow);
+  margin-bottom: 1.2rem;
+  animation: flicker 0.1s steps(1) 0.4s 6 alternate;
+}
+
+@keyframes flicker {
+  from { opacity: 1; }
+  to   { opacity: 0.3; }
+}
+
+.levelup-badge {
+  font-size: 5.5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  animation: badge-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+  display: block;
+}
+
+@keyframes badge-bounce {
+  from { transform: scale(0.3) rotate(-20deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.levelup-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  animation: slide-up 0.4s ease 0.6s both;
+}
+
+.levelup-desc {
+  color: var(--brand-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  animation: slide-up 0.4s ease 0.75s both;
+}
+
+.levelup-xp-pill {
+  display: inline-block;
+  background: rgba(255,87,34,0.15);
+  border: 1px solid rgba(255,87,34,0.4);
+  color: var(--brand-primary);
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  padding: 0.35rem 1.1rem;
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  animation: slide-up 0.4s ease 0.85s both;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.levelup-dismiss {
+  display: block;
+  width: 100%;
+  background: var(--brand-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.9rem 2rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  animation: slide-up 0.4s ease 1s both;
+}
+
+.levelup-dismiss:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255,87,34,0.45);
+}
+
+/* ============================================================
+   VIDEO MODAL (embedded player)
+============================================================ */
+#video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(5,5,10,0.92);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+#video-modal.modal-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.video-modal-inner {
+  width: min(860px, 94vw);
+  position: relative;
+}
+
+.video-modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.video-modal-title {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brand-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 50px);
+}
+
+.video-modal-close {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: var(--brand-text);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.video-modal-close:hover { background: rgba(255,255,255,0.2); }
+
+.video-modal-frame {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+}
+
+.video-modal-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Clicking the thumbnail thumbnail triggers the modal */
+.tut-thumb.has-video {
+  cursor: pointer;
+}
+
+.tut-thumb.has-video:hover .play-btn {
+  opacity: 1;
+}
+
+
+/* Thumb link wrapper (replaces <a> for embedded video) */
+.tut-thumb-link {
+  cursor: pointer;
+  display: block;
+}
+
+.tut-thumb-link:hover .play-btn {
+  opacity: 1;
+}

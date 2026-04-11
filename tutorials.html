@@ -34,6 +34,53 @@
       color: var(--brand-primary);
       background: rgba(255,87,34,0.08);
     }
+
+    /* Real thumbnail styles */
+    .tut-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-radius: var(--radius) var(--radius) 0 0;
+      background: #0d0d18;
+    }
+    .tut-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .tut-card:hover .tut-thumb img {
+      transform: scale(1.04);
+    }
+    .tut-thumb .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-size: 2.8rem;
+    }
+    .tut-card:hover .play-btn {
+      opacity: 1;
+    }
+    .tut-duration {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.6rem;
+      background: rgba(0,0,0,0.82);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      letter-spacing: 0.03em;
+    }
   </style>
 </head>
 <body>
@@ -65,138 +112,595 @@
     <div class="container">
 
       <div class="filter-bar">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Godot</button>
-        <button class="filter-btn">Blender</button>
-        <button class="filter-btn">GDScript</button>
-        <button class="filter-btn">Shaders</button>
-        <button class="filter-btn">Beginner</button>
-        <button class="filter-btn">Intermediate</button>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="blender">Blender</button>
+        <button class="filter-btn" data-filter="modifiers">Modifiers</button>
+        <button class="filter-btn" data-filter="tools">Tools</button>
+        <button class="filter-btn" data-filter="materials">Materials</button>
+        <button class="filter-btn" data-filter="beginner">Beginner</button>
       </div>
 
       <!-- ============================================================
            HOW TO ADD A NEW TUTORIAL:
            1. Copy one of the cards below
            2. Give it a unique data-tutorial-id (use dashes, no spaces)
-           3. Set data-difficulty to: beginner | intermediate | all
-           4. Update the title, excerpt, tags, thumb emoji
-           5. Set the href on the <a> tags to your YouTube link
-           6. Add a matching entry in progress.html TUTORIAL_NAMES object
+           3. Set data-tags to match filter-btn data-filter values (space-separated)
+           4. Update the title, excerpt, duration, video URL, and thumbnail URL
+           5. Add a matching entry in progress.html TUTORIAL_NAMES object
       ============================================================ -->
       <div class="tutorials-grid-3">
 
-        <div data-tutorial-id="godot-beginner-3d" data-difficulty="beginner" class="tut-card">
-          <a href="#" target="_blank" style="text-decoration:none;color:inherit;">
-            <div class="tut-thumb">🕹️<div class="play-btn">▶</div></div>
-          </a>
-          <div class="tut-meta">
-            <div class="tut-tags">
-              <span class="tut-tag">Godot</span>
-              <span class="tut-tag">Beginner</span>
-              <span class="tut-tag">GDScript</span>
+        <!-- 1 -->
+        <div data-tutorial-id="blender-ui" data-tags="blender beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="dduAKv9G8DE" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/dduAKv9G8DE/maxresdefault.jpg" alt="Blender User Interface" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">3:09</span>
             </div>
-            <div class="tut-title">Build Your First 3D Game in Godot — Complete Beginner Guide</div>
-            <p class="tut-excerpt">We set up the project, import a 3D scene, write our first GDScript, and get a character moving — from zero.</p>
-            <div class="tut-footer">
-              <span>🕐 50 min</span>
-              <a href="#" target="_blank" class="watch-link">Watch →</a>
-            </div>
-            <button class="xp-complete-btn"></button>
           </div>
-        </div>
-
-        <div data-tutorial-id="godot-shader-intro" data-difficulty="intermediate" class="tut-card">
-          <a href="#" target="_blank" style="text-decoration:none;color:inherit;">
-            <div class="tut-thumb">🔷<div class="play-btn">▶</div></div>
-          </a>
-          <div class="tut-meta">
-            <div class="tut-tags">
-              <span class="tut-tag">Shaders</span>
-              <span class="tut-tag">Intermediate</span>
-            </div>
-            <div class="tut-title">Write Your First Custom Shader in Godot 4</div>
-            <p class="tut-excerpt">No scary math — practical shader code that makes things look awesome.</p>
-            <div class="tut-footer">
-              <span>🕐 22 min</span>
-              <a href="#" target="_blank" class="watch-link">Watch →</a>
-            </div>
-            <button class="xp-complete-btn"></button>
-          </div>
-        </div>
-
-        <div data-tutorial-id="blender-godot-export" data-difficulty="intermediate" class="tut-card">
-          <a href="#" target="_blank" style="text-decoration:none;color:inherit;">
-            <div class="tut-thumb">🧊<div class="play-btn">▶</div></div>
-          </a>
-          <div class="tut-meta">
-            <div class="tut-tags">
-              <span class="tut-tag">Blender</span>
-              <span class="tut-tag">Godot</span>
-              <span class="tut-tag">Intermediate</span>
-            </div>
-            <div class="tut-title">Export From Blender to Godot 4 Without Breaking Everything</div>
-            <p class="tut-excerpt">Scale, materials, animations — the complete import pipeline, finally explained.</p>
-            <div class="tut-footer">
-              <span>🕐 28 min</span>
-              <a href="#" target="_blank" class="watch-link">Watch →</a>
-            </div>
-            <button class="xp-complete-btn"></button>
-          </div>
-        </div>
-
-        <div data-tutorial-id="blender-rigging-intro" data-difficulty="intermediate" class="tut-card">
-          <a href="#" target="_blank" style="text-decoration:none;color:inherit;">
-            <div class="tut-thumb">🦴<div class="play-btn">▶</div></div>
-          </a>
-          <div class="tut-meta">
-            <div class="tut-tags">
-              <span class="tut-tag">Blender</span>
-              <span class="tut-tag">Intermediate</span>
-            </div>
-            <div class="tut-title">Rigging Your First Character in Blender</div>
-            <p class="tut-excerpt">Armatures, weight painting, and getting a clean rig that won't fight you.</p>
-            <div class="tut-footer">
-              <span>🕐 35 min</span>
-              <a href="#" target="_blank" class="watch-link">Watch →</a>
-            </div>
-            <button class="xp-complete-btn"></button>
-          </div>
-        </div>
-
-        <div data-tutorial-id="godot-physics-character" data-difficulty="intermediate" class="tut-card">
-          <a href="#" target="_blank" style="text-decoration:none;color:inherit;">
-            <div class="tut-thumb">⚙️<div class="play-btn">▶</div></div>
-          </a>
-          <div class="tut-meta">
-            <div class="tut-tags">
-              <span class="tut-tag">Godot</span>
-              <span class="tut-tag">GDScript</span>
-              <span class="tut-tag">Intermediate</span>
-            </div>
-            <div class="tut-title">Godot Physics: CharacterBody3D, Collision, and Movement</div>
-            <p class="tut-excerpt">Build a proper 3D character controller from scratch — jump, run, and collide.</p>
-            <div class="tut-footer">
-              <span>🕐 40 min</span>
-              <a href="#" target="_blank" class="watch-link">Watch →</a>
-            </div>
-            <button class="xp-complete-btn"></button>
-          </div>
-        </div>
-
-        <div data-tutorial-id="blender-uv-unwrap" data-difficulty="beginner" class="tut-card">
-          <a href="#" target="_blank" style="text-decoration:none;color:inherit;">
-            <div class="tut-thumb">🎨<div class="play-btn">▶</div></div>
-          </a>
           <div class="tut-meta">
             <div class="tut-tags">
               <span class="tut-tag">Blender</span>
               <span class="tut-tag">Beginner</span>
             </div>
-            <div class="tut-title">UV Unwrapping in Blender — Finally Make Sense of It</div>
-            <p class="tut-excerpt">Seams, unwrapping methods, and getting a clean UV layout without losing your mind.</p>
+            <div class="tut-title">Blender User Interface</div>
+            <p class="tut-excerpt">Get all the details you need about Blender's interface in one short video.</p>
             <div class="tut-footer">
-              <span>🕐 25 min</span>
-              <a href="#" target="_blank" class="watch-link">Watch →</a>
+              <span>🕐 3 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('dduAKv9G8DE')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div data-tutorial-id="object-mode-grs" data-tags="blender beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="UrFgT7LMp9I" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/UrFgT7LMp9I/maxresdefault.jpg" alt="Object Mode: Grab, Rotate, and Scale" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">2:00</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Beginner</span>
+            </div>
+            <div class="tut-title">Object Mode: Grab, Rotate, and Scale in Blender</div>
+            <p class="tut-excerpt">Learn the ins and outs of manipulating an object in object mode.</p>
+            <div class="tut-footer">
+              <span>🕐 2 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('UrFgT7LMp9I')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div data-tutorial-id="edit-mode-grs" data-tags="blender beginner tools" class="tut-card">
+          <div class="tut-thumb-link" data-video="7zxj4kGN3NQ" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/7zxj4kGN3NQ/maxresdefault.jpg" alt="Edit Mode: Grab, Rotate, and Scale" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">2:14</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Beginner</span>
+            </div>
+            <div class="tut-title">Edit Mode: Grab, Rotate, and Scale in Blender</div>
+            <p class="tut-excerpt">Learn everything you need to know about manipulating geometry in Edit Mode.</p>
+            <div class="tut-footer">
+              <span>🕐 2 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('7zxj4kGN3NQ')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div data-tutorial-id="knife-tool" data-tags="blender tools beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="v3dJ2UvV8sI" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/v3dJ2UvV8sI/maxresdefault.jpg" alt="Knife Tool" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:02</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Tools</span>
+            </div>
+            <div class="tut-title">Carve Your Way to Better Models with Blender's Knife Tool!</div>
+            <p class="tut-excerpt">Make precise cuts, refine your models, and add custom details with the Knife Tool.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('v3dJ2UvV8sI')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div data-tutorial-id="loop-cuts" data-tags="blender tools beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="ijt-1CUFouA" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/ijt-1CUFouA/maxresdefault.jpg" alt="Loop Cuts" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:22</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Tools</span>
+            </div>
+            <div class="tut-title">Slice and Dice: Unlock the Power of Loop Cuts in Blender!</div>
+            <p class="tut-excerpt">Learn the ins and outs of the loop cut tool for cleaner mesh topology.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('ijt-1CUFouA')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div data-tutorial-id="mirror-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="DXVfmzvmK4c" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/DXVfmzvmK4c/maxresdefault.jpg" alt="Mirror Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:42</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Master Symmetry with Blender's Mirror Modifier!</div>
+            <p class="tut-excerpt">Create perfect symmetry and speed up your 3D modeling process.</p>
+            <div class="tut-footer">
+              <span>🕐 2 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('DXVfmzvmK4c')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div data-tutorial-id="geometry-selection" data-tags="blender tools beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="-lKuSonXKqo" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/-lKuSonXKqo/maxresdefault.jpg" alt="How to Select Geometry" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">0:59</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Tools</span>
+            </div>
+            <div class="tut-title">How to Select Geometry Like a Pro</div>
+            <p class="tut-excerpt">Master Shift Select, Loop Select, Linked Select, and Shortest Path Selection.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('-lKuSonXKqo')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div data-tutorial-id="bevel-tool" data-tags="blender tools beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="yCD80QSTWmg" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/yCD80QSTWmg/maxresdefault.jpg" alt="Bevel Tool" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:23</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Tools</span>
+            </div>
+            <div class="tut-title">Bevel Like a Boss: Add Style to Your 3D Models!</div>
+            <p class="tut-excerpt">Learn the ins and outs of the Bevel tool in Blender.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('yCD80QSTWmg')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div data-tutorial-id="extrude-tool" data-tags="blender tools beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="z-l0xmczPhc" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/z-l0xmczPhc/maxresdefault.jpg" alt="Extrude Tool" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:11</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Tools</span>
+            </div>
+            <div class="tut-title">Push, Pull, Create: Unlock Blender's Extrude Tool Power!</div>
+            <p class="tut-excerpt">Master the Extrude tool in Blender and start building 3D shapes with confidence.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('z-l0xmczPhc')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div data-tutorial-id="inset-tool" data-tags="blender tools beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="v_PK6CV_ktQ" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/v_PK6CV_ktQ/maxresdefault.jpg" alt="Inset Tool" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">0:40</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Tools</span>
+            </div>
+            <div class="tut-title">Find the Inset-ive! Blender's Inset Tool</div>
+            <p class="tut-excerpt">Learn about the different options inside the Inset tool.</p>
+            <div class="tut-footer">
+              <span>🕐 &lt;1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('v_PK6CV_ktQ')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div data-tutorial-id="fill-tools" data-tags="blender tools beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="zb6I3HiQ3Sk" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/zb6I3HiQ3Sk/maxresdefault.jpg" alt="Fill Tools" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:18</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Tools</span>
+            </div>
+            <div class="tut-title">Bridge the Gaps: Master Blender's Fill Tools Fast!</div>
+            <p class="tut-excerpt">Learn about Blender's different Fill tool options including Bridge Loops.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('zb6I3HiQ3Sk')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div data-tutorial-id="subdivision-surface" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="ux4qXyJpavU" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/ux4qXyJpavU/maxresdefault.jpg" alt="Subdivision Surface" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">0:49</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Subdivision Surface Secrets: Make Your Models Shine in Blender!</div>
+            <p class="tut-excerpt">Smooth your 3D models and add detail using the Subdivision Surface Modifier.</p>
+            <div class="tut-footer">
+              <span>🕐 &lt;1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('ux4qXyJpavU')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div data-tutorial-id="bevel-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="WPHjfOoZnXg" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/WPHjfOoZnXg/maxresdefault.jpg" alt="Bevel Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:11</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Bevel Up Your Game With the Bevel Modifier</div>
+            <p class="tut-excerpt">Create smooth, clean edges and improve your 3D models with the Bevel Modifier.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('WPHjfOoZnXg')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div data-tutorial-id="solidify-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="YLOrS1kgCpc" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/YLOrS1kgCpc/maxresdefault.jpg" alt="Solidify Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:34</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Stay Solid: Give Your Models Some Depth!</div>
+            <p class="tut-excerpt">Use Blender's Solidify Modifier to add thickness to your 3D models.</p>
+            <div class="tut-footer">
+              <span>🕐 2 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('YLOrS1kgCpc')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div data-tutorial-id="boolean-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="X2EuW1AgzTw" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/X2EuW1AgzTw/maxresdefault.jpg" alt="Boolean Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">2:11</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Bool-etproof Modeling Techniques! Boolean Modifier</div>
+            <p class="tut-excerpt">Cut, combine, and intersect objects to create complex shapes with the Boolean Modifier.</p>
+            <div class="tut-footer">
+              <span>🕐 2 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('X2EuW1AgzTw')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+        <div data-tutorial-id="array-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="RokaDLSQT0M" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/RokaDLSQT0M/maxresdefault.jpg" alt="Array Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">0:56</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Array Modifier</div>
+            <p class="tut-excerpt">Learn how the Array Modifier works to duplicate and arrange geometry in Blender.</p>
+            <div class="tut-footer">
+              <span>🕐 &lt;1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('RokaDLSQT0M')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+        <div data-tutorial-id="skin-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="qZj_TGe4nLo" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/qZj_TGe4nLo/maxresdefault.jpg" alt="Skin Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">0:56</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Skin Modifier</div>
+            <p class="tut-excerpt">Learn how to use Blender's Skin Modifier to generate mesh from edges and vertices.</p>
+            <div class="tut-footer">
+              <span>🕐 &lt;1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('qZj_TGe4nLo')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+        <div data-tutorial-id="screw-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="JFzWbjJ8IIY" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/JFzWbjJ8IIY/maxresdefault.jpg" alt="Screw Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:27</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Screw Modifier</div>
+            <p class="tut-excerpt">Learn how to use the Screw Modifier in Blender to spin profiles into 3D forms.</p>
+            <div class="tut-footer">
+              <span>🕐 1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('JFzWbjJ8IIY')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+        <div data-tutorial-id="lattice-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="9Jv6sCBDZR4" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/9Jv6sCBDZR4/maxresdefault.jpg" alt="Lattice Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">1:33</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Lattice Modifier</div>
+            <p class="tut-excerpt">Learn how to use the Lattice Modifier in Blender to deform objects non-destructively.</p>
+            <div class="tut-footer">
+              <span>🕐 2 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('9Jv6sCBDZR4')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+        <div data-tutorial-id="curve-modifier" data-tags="blender modifiers beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="zLAChQHot5Y" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/zLAChQHot5Y/maxresdefault.jpg" alt="Curve Modifier" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">0:57</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Modifiers</span>
+            </div>
+            <div class="tut-title">Curve Modifier</div>
+            <p class="tut-excerpt">Learn to bend your objects with the Curve Modifier in Blender.</p>
+            <div class="tut-footer">
+              <span>🕐 &lt;1 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('zLAChQHot5Y')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 21 -->
+        <div data-tutorial-id="principled-bsdf" data-tags="blender materials beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="jGw283Fc4aE" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/jGw283Fc4aE/maxresdefault.jpg" alt="Principled BSDF" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">5:56</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Materials</span>
+            </div>
+            <div class="tut-title">Guide to the Principled BSDF</div>
+            <p class="tut-excerpt">Get the basics of the Principled BSDF shader — make everything from rubber to glass.</p>
+            <div class="tut-footer">
+              <span>🕐 6 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('jGw283Fc4aE')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 22 -->
+        <div data-tutorial-id="image-textures" data-tags="blender materials beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="dExoV7ZD5R8" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/dExoV7ZD5R8/maxresdefault.jpg" alt="Image Textures" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">2:46</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Materials</span>
+            </div>
+            <div class="tut-title">Image Textures</div>
+            <p class="tut-excerpt">Learn how to set up basic materials with image textures in Blender.</p>
+            <div class="tut-footer">
+              <span>🕐 3 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('dExoV7ZD5R8')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 23 -->
+        <div data-tutorial-id="uv-unwrap" data-tags="blender materials beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="uCaAJanwrds" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/uCaAJanwrds/maxresdefault.jpg" alt="Learn to UV Unwrap" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">4:33</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Materials</span>
+            </div>
+            <div class="tut-title">Learn to UV Unwrap in Blender</div>
+            <p class="tut-excerpt">A short video that explains UV unwrapping and adding textures to your 3D models.</p>
+            <div class="tut-footer">
+              <span>🕐 5 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('uCaAJanwrds')">Watch →</span>
+            </div>
+            <button class="xp-complete-btn"></button>
+          </div>
+        </div>
+
+        <!-- 24 -->
+        <div data-tutorial-id="grease-pencil" data-tags="blender beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="inckC5b7zRk" data-videotitle="" onclick="openVideo(this)">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/inckC5b7zRk/maxresdefault.jpg" alt="Blender Grease Pencil" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">6:03</span>
+            </div>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags">
+              <span class="tut-tag">Blender</span>
+              <span class="tut-tag">Beginner</span>
+            </div>
+            <div class="tut-title">Blender Grease Pencil Beginner Tutorial – Learn in 6 Minutes!</div>
+            <p class="tut-excerpt">Everything you need to get started with Grease Pencil — drawing, layers, strokes, and key tools.</p>
+            <div class="tut-footer">
+              <span>🕐 6 min</span>
+              <span class="watch-link" style="cursor:pointer" onclick="openVideoById('inckC5b7zRk')">Watch →</span>
             </div>
             <button class="xp-complete-btn"></button>
           </div>
@@ -234,12 +738,71 @@
   <script src="js/xp.js"></script>
   <script src="js/main.js"></script>
   <script>
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    // Filter logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.tut-card');
+
+    filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const tags = card.dataset.tags || '';
+          if (filter === 'all' || tags.includes(filter)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
   </script>
+
+  <!-- VIDEO MODAL -->
+  <div id="video-modal" onclick="closeVideoOnBackdrop(event)">
+    <div class="video-modal-inner">
+      <div class="video-modal-top">
+        <div class="video-modal-title" id="video-modal-title"></div>
+        <button class="video-modal-close" onclick="closeVideo()" title="Close">✕</button>
+      </div>
+      <div class="video-modal-frame">
+        <iframe id="video-modal-iframe" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openVideo(thumbLink) {
+      const videoId = thumbLink.dataset.video;
+      const card    = thumbLink.closest('[data-tutorial-id]');
+      const title   = card ? card.querySelector('.tut-title')?.textContent : '';
+      openVideoById(videoId, title);
+    }
+
+    function openVideoById(videoId, title) {
+      const modal = document.getElementById('video-modal');
+      document.getElementById('video-modal-iframe').src =
+        `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      document.getElementById('video-modal-title').textContent = title || '';
+      modal.classList.add('modal-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideo() {
+      const modal = document.getElementById('video-modal');
+      modal.classList.remove('modal-open');
+      document.getElementById('video-modal-iframe').src = '';
+      document.body.style.overflow = '';
+    }
+
+    function closeVideoOnBackdrop(e) {
+      if (e.target === document.getElementById('video-modal')) closeVideo();
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideo(); });
+  </script>
+
 </body>
 </html>
