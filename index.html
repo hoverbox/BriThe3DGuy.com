@@ -388,7 +388,7 @@
     ];
 
     const COLS       = 9;
-    const ROWS       = 6;   // was 12 — 6 fills the viewport; texture pool loops sooner
+    const ROWS       = 12;   // enough rows to reach the top fade zone in perspective
     const CARD_W     = 32;
     const CARD_H     = 18;
     const GAP_X      = 2.5;
@@ -399,11 +399,12 @@
     if (!wrap || typeof THREE === 'undefined') return;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x07070f);
+    // No scene.background — canvas is transparent so the page bg + CSS fades show through
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // capped at 1.5
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.setClearColor(0x000000, 0); // fully transparent — lets CSS fades show through
     wrap.appendChild(renderer.domElement);
 
     const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2000);
@@ -523,7 +524,7 @@
       requestAnimationFrame(animate);
       scrollY += SCROLL_SPD;
 
-      const wrapThreshold = rowHeight * ROWS * 0.6;
+      const wrapThreshold = rowHeight * ROWS * 0.75; // allow rows to scroll deep into top fade before recycling
       rowGroups.forEach((group, i) => {
         let y = (-i * rowHeight + scrollY) % totalCycleH;
         if (y > wrapThreshold) y -= totalCycleH;
