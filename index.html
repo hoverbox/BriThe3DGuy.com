@@ -9,35 +9,57 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Home-page-only styles */
+    /* ── 3D Poster Wall Hero ── */
     #hero {
-      min-height: 100vh;
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 7rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
     }
 
-    .hero-glow {
+    #poster-canvas {
       position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Gradient fades — cards dissolve into edges, no pop-in */
+    .hero-fade-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 38vh; z-index: 1;
+      background: linear-gradient(to top, #05050f 0%, #05050f 25%, transparent 100%);
       pointer-events: none;
     }
-
-    .hero-glow-1 {
-      width: 600px; height: 600px;
-      background: rgba(255,87,34,0.18);
-      top: -100px; left: -150px;
+    .hero-fade-top {
+      position: absolute; top: 0; left: 0; right: 0; height: 32vh; z-index: 1;
+      background: linear-gradient(to bottom, #05050f 0%, #05050f 18%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-fade-left {
+      position: absolute; top: 0; left: 0; bottom: 0; width: 10vw; z-index: 1;
+      background: linear-gradient(to right, #05050f 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-fade-right {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 10vw; z-index: 1;
+      background: linear-gradient(to left, #05050f 0%, transparent 100%);
+      pointer-events: none;
+    }
+    /* Centre vignette so hero text stays readable */
+    .hero-vignette {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse 65% 50% at 50% 50%, rgba(5,5,15,0.38) 0%, rgba(5,5,15,0.70) 100%);
     }
 
-    .hero-glow-2 {
-      width: 500px; height: 500px;
-      background: rgba(0,229,255,0.12);
-      bottom: -80px; right: -100px;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
     }
 
     .hero-tag {
@@ -68,7 +90,7 @@
       50% { opacity: 0.4; transform: scale(0.7); }
     }
 
-    .hero h1 {
+    .hero-content h1 {
       font-family: var(--font-display);
       font-size: clamp(3.2rem, 10vw, 7.5rem);
       line-height: 0.95;
@@ -76,8 +98,8 @@
       margin-bottom: 1.5rem;
     }
 
-    .hero h1 .line-orange { color: var(--brand-primary); }
-    .hero h1 .line-cyan   { color: var(--brand-secondary); }
+    .hero-content h1 .line-orange { color: var(--brand-primary); }
+    .hero-content h1 .line-cyan   { color: var(--brand-secondary); }
 
     .hero-sub {
       font-size: clamp(1rem, 2.5vw, 1.25rem);
@@ -206,16 +228,20 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-glow hero-glow-1"></div>
-    <div class="hero-glow hero-glow-2"></div>
-    <div>
+    <canvas id="poster-canvas"></canvas>
+    <!-- Gradient fades — cards dissolve cleanly, no pop-in -->
+    <div class="hero-fade-bottom"></div>
+    <div class="hero-fade-top"></div>
+    <div class="hero-fade-left"></div>
+    <div class="hero-fade-right"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-content">
       <div class="hero-tag"><span class="dot"></span> 3D Graphics &amp; Godot Game Dev</div>
       <h1>
         <span class="line-orange">Learn.</span><br>
         <span>Build.</span><br>
         <span class="line-cyan">Level Up.</span>
       </h1>
-      <!-- EDIT: Your hero subheadline -->
       <p class="hero-sub">
         Hey, I'm Bri! I teach 3D graphics and Godot game development 
         in plain English — no gatekeeping, just good stuff for 
@@ -399,5 +425,118 @@
 
   <script src="js/xp.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+  // ── 3D Infinite Poster Scroll Wall — scrolls UPWARD, fades at edges ──
+  (function() {
+    const THUMBNAILS = [
+      'dduAKv9G8DE','UrFgT7LMp9I','7zxj4kGN3NQ','v3dJ2UvV8sI','ijt-1CUFouA','DXVfmzvmK4c',
+      '-lKuSonXKqo','yCD80QSTWmg','z-l0xmczPhc','v_PK6CV_ktQ','zb6I3HiQ3Sk','ux4qXyJpavU',
+      'WPHjfOoZnXg','YLOrS1kgCpc','X2EuW1AgzTw','RokaDLSQT0M','qZj_TGe4nLo','JFzWbjJ8IIY',
+      '9Jv6sCBDZR4','zLAChQHot5Y','jGw283Fc4aE','dExoV7ZD5R8','uCaAJanwrds','inckC5b7zRk'
+    ];
+
+    const canvas = document.getElementById('poster-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x05050f);
+
+    const scene = new THREE.Scene();
+
+    // Camera positioned above looking down-forward — cards rise from bottom
+    const camera = new THREE.PerspectiveCamera(54, window.innerWidth / window.innerHeight, 0.1, 120);
+    camera.position.set(0, 7, 14);
+    camera.lookAt(0, 0, -4);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const l1 = new THREE.PointLight(0xff5722, 2.8, 50); l1.position.set(8, 10, 6); scene.add(l1);
+    const l2 = new THREE.PointLight(0x00e5ff, 2.0, 50); l2.position.set(-8, 8, -6); scene.add(l2);
+
+    const COLS = 6, ROWS = 8;
+    const CW = 3.3, CH = 1.86, GX = 0.28, GY = 0.26;
+    const SX = CW + GX, SY = CH + GY;
+    const TOTAL_H = SY * ROWS;
+
+    function roundedRectGeom(w, h, r) {
+      const s = new THREE.Shape();
+      s.moveTo(-w/2+r,-h/2); s.lineTo(w/2-r,-h/2);
+      s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r); s.lineTo(w/2,h/2-r);
+      s.quadraticCurveTo(w/2,h/2,w/2-r,h/2); s.lineTo(-w/2+r,h/2);
+      s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r); s.lineTo(-w/2,-h/2+r);
+      s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);
+      return new THREE.ShapeGeometry(s, 4);
+    }
+
+    const geom = roundedRectGeom(CW, CH, 0.1);
+    const loader = new THREE.TextureLoader();
+    loader.crossOrigin = 'anonymous';
+
+    const group = new THREE.Group();
+    // Tilt grid so it lies on a receding plane — cards scroll up from bottom
+    group.rotation.x = 0.20;
+    group.position.set(0, -2, -5);
+    scene.add(group);
+
+    const cards = [];
+    const totalW = SX * (COLS - 1);
+    const rng = (a, b) => Math.random() * (b - a) + a;
+
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const idx = (r * COLS + c) % THUMBNAILS.length;
+        const tex = loader.load(`https://i.ytimg.com/vi/${THUMBNAILS[idx]}/mqdefault.jpg`);
+        tex.minFilter = THREE.LinearFilter;
+
+        const mat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.22, metalness: 0.05 });
+        const mesh = new THREE.Mesh(geom, mat);
+
+        // Spread cards evenly across the full loop height so grid is full on load
+        const baseY = -(r / ROWS) * TOTAL_H;
+        mesh.position.set(c * SX - totalW / 2, baseY, rng(-0.2, 0.2));
+        mesh.rotation.z = rng(-0.035, 0.035);
+
+        group.add(mesh);
+        cards.push({ mesh, baseY });
+      }
+    }
+
+    let offset = 0;
+    let mx = 0, cx = 0;
+    window.addEventListener('mousemove', e => {
+      mx = (e.clientX / window.innerWidth - 0.5) * 2;
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Scroll UPWARD: offset increases → Y positions decrease (move up)
+      offset += 0.009;
+
+      cards.forEach(({ mesh, baseY }) => {
+        let y = baseY - offset * SY;
+        // Wrap: when card exits top, loop it back to the bottom
+        y = ((y % TOTAL_H) - TOTAL_H) % TOTAL_H;
+        if (y > 0) y -= TOTAL_H;
+        mesh.position.y = y;
+      });
+
+      // Subtle mouse parallax
+      cx += (mx - cx) * 0.04;
+      group.rotation.y = cx * 0.09;
+      camera.position.x = cx * 0.35;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  })();
+  </script>
 </body>
 </html>
