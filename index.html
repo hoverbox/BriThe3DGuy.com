@@ -3,207 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bri The 3D Guy — 3D Graphics & Godot Game Dev</title>
-  <meta name="description" content="Learn 3D graphics and Godot game development with Bri. Tutorials for beginners to intermediate learners." />
+  <title>Bri The 3D Guy — Free Blender &amp; Godot Tutorials</title>
+  <meta name="description" content="Free Blender and Godot 4 tutorials for beginners. Learn 3D modeling, game dev, and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ── 3D Poster Wall Hero ── */
-    #hero {
+    /* ── Hero wrapper ───────────────────────────────────────────── */
+    .home-hero-wrap {
       position: relative;
       width: 100%;
       height: 100vh;
+      min-height: 600px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    #poster-canvas {
+    /* Three.js canvas sits full-bleed behind everything */
+    #poster-canvas-wrap {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+    }
+    #poster-canvas-wrap canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
     }
 
-    /* Gradient fades — cards dissolve into edges, no pop-in */
-    .hero-fade-bottom {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 38vh; z-index: 1;
-      background: linear-gradient(to top, #05050f 0%, #05050f 25%, transparent 100%);
-      pointer-events: none;
-    }
+    /* Dark gradient fades */
     .hero-fade-top {
-      position: absolute; top: 0; left: 0; right: 0; height: 32vh; z-index: 1;
-      background: linear-gradient(to bottom, #05050f 0%, #05050f 18%, transparent 100%);
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 70%;
+      background: linear-gradient(to bottom,
+        rgba(7,7,18,1)   0%,
+        rgba(7,7,18,1)   35%,
+        rgba(7,7,18,0.9) 55%,
+        rgba(7,7,18,0)   100%);
       pointer-events: none;
+      z-index: 2;
     }
-    .hero-fade-left {
-      position: absolute; top: 0; left: 0; bottom: 0; width: 10vw; z-index: 1;
-      background: linear-gradient(to right, #05050f 0%, transparent 100%);
+    .hero-fade-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45%;
+      background: linear-gradient(to top,
+        rgba(7,7,18,1)   0%,
+        rgba(7,7,18,0.6) 50%,
+        rgba(7,7,18,0)   100%);
       pointer-events: none;
+      z-index: 2;
     }
-    .hero-fade-right {
-      position: absolute; top: 0; right: 0; bottom: 0; width: 10vw; z-index: 1;
-      background: linear-gradient(to left, #05050f 0%, transparent 100%);
+    .hero-fade-sides {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,
+        rgba(7,7,18,0.7) 0%,
+        transparent 20%,
+        transparent 80%,
+        rgba(7,7,18,0.7) 100%);
       pointer-events: none;
-    }
-    /* Centre vignette so hero text stays readable */
-    .hero-vignette {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background: radial-gradient(ellipse 65% 50% at 50% 50%, rgba(5,5,15,0.38) 0%, rgba(5,5,15,0.70) 100%);
+      z-index: 2;
     }
 
+    /* Hero content */
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 10;
       text-align: center;
-      padding: 2rem;
+      padding: 0 1.5rem;
+      max-width: 800px;
     }
 
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255,87,34,0.15);
-      border: 1px solid rgba(255,87,34,0.4);
-      color: var(--brand-primary);
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1.8rem;
+    .hero-content .section-label {
+      margin-bottom: 1rem;
+      display: block;
     }
 
-    .hero-tag .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--brand-primary);
-      animation: pulse-dot 1.8s ease-in-out infinite;
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+      color: #fff;
     }
 
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.7); }
+    .hero-title span {
+      color: #FF5722;
     }
-
-    .hero-content h1 {
-      font-family: var(--font-display);
-      font-size: clamp(3.2rem, 10vw, 7.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-content h1 .line-orange { color: var(--brand-primary); }
-    .hero-content h1 .line-cyan   { color: var(--brand-secondary); }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: var(--brand-muted);
-      max-width: 540px;
-      margin: 0 auto 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      color: rgba(255,255,255,0.65);
+      font-size: clamp(1rem, 2vw, 1.2rem);
       line-height: 1.6;
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .hero-btns {
+    .hero-ctas {
       display: flex;
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    /* About strip */
-    .about-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
+    .hero-ctas .btn-primary {
+      font-size: 1rem;
+      padding: 0.85rem 2rem;
     }
 
-    .avatar-box {
-      width: 100%;
-      aspect-ratio: 4/5;
-      border-radius: var(--radius);
-      background: linear-gradient(145deg, #1e1e2e, #0d0d18);
-      border: 1px solid var(--brand-card-border);
-      display: flex;
+    .hero-ctas .btn-ghost {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-size: 7rem;
-      opacity: 0.25;
-      overflow: hidden;
-      position: relative;
+      gap: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 50px;
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      cursor: pointer;
+      background: transparent;
     }
 
-    /* REPLACE avatar-box inner with your photo:
-       <img src="images/bri.jpg" alt="Brian" style="width:100%;height:100%;object-fit:cover;opacity:1"> */
-
-    .avatar-wrap { position: relative; }
-
-    .avatar-badge {
-      position: absolute;
-      bottom: -1rem;
-      right: -1rem;
-      background: var(--brand-primary);
+    .hero-ctas .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.4);
       color: #fff;
-      padding: 0.9rem 1.3rem;
-      border-radius: 14px;
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      line-height: 1.3;
+      background: rgba(255,255,255,0.06);
     }
 
-    .stats-row {
-      display: flex;
-      gap: 2.5rem;
-      margin-top: 2.5rem;
-      flex-wrap: wrap;
+    /* Nav override — make it transparent on the hero */
+    nav {
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      background: transparent;
     }
 
-    .stat {
-      border-left: 3px solid var(--brand-primary);
-      padding-left: 1rem;
-    }
-
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      color: var(--brand-text);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--brand-muted);
-      margin-top: 0.3rem;
-    }
-
-    /* Home tutorials */
-    .home-tuts-grid {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .home-tuts-grid .tut-thumb { font-size: 4rem; }
-    .home-tuts-grid .featured .tut-thumb { aspect-ratio: 16/8; }
-    .home-tuts-grid .featured .tut-title { font-size: 1.3rem; }
-
-    .side-tuts {
+    /* Scroll hint arrow */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      align-items: center;
+      gap: 0.5rem;
+      animation: bobDown 2s ease-in-out infinite;
     }
-
-    .side-tuts .tut-thumb { aspect-ratio: 16/7; font-size: 2.5rem; }
-
-    @media (max-width: 768px) {
-      .about-strip { grid-template-columns: 1fr; gap: 3rem; }
-      .home-tuts-grid { grid-template-columns: 1fr; }
+    .scroll-hint::after {
+      content: '↓';
+      font-size: 1.2rem;
+    }
+    @keyframes bobDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
     }
   </style>
 </head>
@@ -226,181 +199,144 @@
     </button>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <canvas id="poster-canvas"></canvas>
-    <!-- Gradient fades — cards dissolve cleanly, no pop-in -->
-    <div class="hero-fade-bottom"></div>
+  <!-- ════════════════════════════════════════════════
+       HERO — Three.js scrolling tutorial thumbnails
+  ════════════════════════════════════════════════ -->
+  <div class="home-hero-wrap">
+    <div id="poster-canvas-wrap"></div>
     <div class="hero-fade-top"></div>
-    <div class="hero-fade-left"></div>
-    <div class="hero-fade-right"></div>
-    <div class="hero-vignette"></div>
+    <div class="hero-fade-bottom"></div>
+    <div class="hero-fade-sides"></div>
+
     <div class="hero-content">
-      <div class="hero-tag"><span class="dot"></span> 3D Graphics &amp; Godot Game Dev</div>
-      <h1>
-        <span class="line-orange">Learn.</span><br>
-        <span>Build.</span><br>
-        <span class="line-cyan">Level Up.</span>
-      </h1>
+      <span class="section-label">Free • Open Source Tools • No Paywalls</span>
+      <h1 class="hero-title">Learn <span>Blender</span> &amp;<br>Godot From Scratch</h1>
       <p class="hero-sub">
-        Hey, I'm Bri! I teach 3D graphics and Godot game development 
-        in plain English — no gatekeeping, just good stuff for 
-        beginners through intermediate learners.
+        Short, beginner-friendly tutorials that actually explain what's happening —
+        no jargon, no skipped steps, no 4-hour slogs.
       </p>
-      <div class="hero-btns">
-        <a href="tutorials.html" class="btn-primary">▶ Start Learning</a>
-        <a href="topics.html" class="btn-secondary">Browse Topics</a>
+      <div class="hero-ctas">
+        <a href="tutorials.html" class="btn-primary">Browse Tutorials →</a>
+        <a href="progress.html" class="btn-ghost">⚡ Track Your Progress</a>
       </div>
     </div>
-  </section>
 
-  <!-- TICKER -->
-  <div class="ticker-wrap" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="accent">✦</span>
-      <span>Blender</span><span class="accent">✦</span>
-      <span>Godot Engine</span><span class="accent">✦</span>
-      <span>GDScript</span><span class="accent">✦</span>
-      <span>3D Modeling</span><span class="accent">✦</span>
-      <span>Texturing</span><span class="accent">✦</span>
-      <span>Rigging</span><span class="accent">✦</span>
-      <span>Shaders</span><span class="accent">✦</span>
-      <span>Lighting</span><span class="accent">✦</span>
-      <span>Animation</span><span class="accent">✦</span>
-      <span>Scene Trees</span><span class="accent">✦</span>
-      <span>UV Mapping</span><span class="accent">✦</span>
-      <span>Physics</span>
-      <!-- Duplicate for seamless loop -->
-      <span class="accent">✦</span>
-      <span>Blender</span><span class="accent">✦</span>
-      <span>Godot Engine</span><span class="accent">✦</span>
-      <span>GDScript</span><span class="accent">✦</span>
-      <span>3D Modeling</span><span class="accent">✦</span>
-      <span>Texturing</span><span class="accent">✦</span>
-      <span>Rigging</span><span class="accent">✦</span>
-      <span>Shaders</span><span class="accent">✦</span>
-      <span>Lighting</span><span class="accent">✦</span>
-      <span>Animation</span><span class="accent">✦</span>
-      <span>Scene Trees</span><span class="accent">✦</span>
-      <span>UV Mapping</span><span class="accent">✦</span>
-      <span>Physics</span>
-    </div>
+    <div class="scroll-hint">Scroll</div>
   </div>
 
-  <!-- ABOUT STRIP -->
-  <section class="section-dark">
+  <!-- ════════════════════════════════════════════════
+       BELOW-FOLD CONTENT
+  ════════════════════════════════════════════════ -->
+
+  <!-- Feature strip -->
+  <section style="padding: 5rem 0 4rem;">
     <div class="container">
-      <div class="about-strip">
-        <div class="avatar-wrap">
-          <div class="avatar-box">🎮</div>
-          <div class="avatar-badge">3D Artist<br>&amp; Educator</div>
+      <span class="section-label">Why Bri The 3D Guy</span>
+      <h2 class="section-title">Built for Real Beginners</h2>
+      <p class="section-sub">No assumptions. Every step explained. Free tools only.</p>
+      <div class="features-grid" style="margin-top:3rem;">
+        <div class="feature-card">
+          <div class="feature-icon">🧊</div>
+          <h3>Blender</h3>
+          <p>3D modeling, UV unwrapping, rigging, modifiers — all the core skills, in order.</p>
         </div>
-        <div>
-          <span class="section-label">About Bri</span>
-          <h2 class="section-title">I make 3D make sense.</h2>
-          <!-- EDIT: Your short bio -->
-          <p class="section-sub">
-            I'm Brian — a 3D artist and game dev enthusiast who got tired 
-            of tutorials that assume you already know everything. No jargon 
-            walls, no skipping steps. Just real learning.
-          </p>
-          <div class="stats-row">
-            <!-- EDIT: Your stats -->
-            <div class="stat">
-              <div class="stat-num">50+</div>
-              <div class="stat-label">Free Tutorials</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">10K+</div>
-              <div class="stat-label">Students Helped</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">5 yrs</div>
-              <div class="stat-label">Teaching</div>
-            </div>
-          </div>
-          <br><a href="about.html" class="btn-secondary" style="margin-top:1rem;">More About Me →</a>
+        <div class="feature-card">
+          <div class="feature-icon">🕹️</div>
+          <h3>Godot Engine 4</h3>
+          <p>GDScript, physics, shaders, and game logic. Build playable projects from day one.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>The Full Pipeline</h3>
+          <p>Take art from Blender into Godot without the usual headaches.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>XP &amp; Ranks</h3>
+          <p>Mark tutorials complete, earn XP, and level up from Peon to Legendary.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURED TUTORIALS -->
-  <section>
+  <!-- Latest tutorials preview -->
+  <section class="section-dark">
     <div class="container">
-      <span class="section-label">Latest Content</span>
-      <h2 class="section-title" style="margin-bottom:2.5rem;">Featured Tutorials</h2>
+      <span class="section-label">Just Published</span>
+      <h2 class="section-title">Latest Tutorials</h2>
+      <div class="tutorials-grid-3" style="margin-top:2.5rem;">
 
-      <div class="home-tuts-grid">
-
-        <!-- FEATURED — Edit or replace with your actual tutorial -->
-        <a href="tutorials.html" class="tut-card featured">
-          <div class="tut-thumb">
-            🕹️
-            <div class="play-btn">▶</div>
+        <div data-tutorial-id="grease-pencil" data-tags="blender beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="inckC5b7zRk" onclick="window.location.href='tutorials.html'">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/inckC5b7zRk/maxresdefault.jpg" alt="Blender Grease Pencil" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">6:03</span>
+            </div>
           </div>
           <div class="tut-meta">
-            <div class="tut-tags">
-              <span class="tut-tag">Godot</span>
-              <span class="tut-tag">Beginner</span>
-              <span class="tut-tag">GDScript</span>
-            </div>
-            <div class="tut-title">Build Your First 3D Game in Godot — Complete Beginner Guide</div>
-            <p class="tut-excerpt">Never opened Godot before? Perfect. We set up the project, import a 3D scene, write our first GDScript, and get a character moving — from zero.</p>
+            <div class="tut-tags"><span class="tut-tag">Blender</span><span class="tut-tag">Beginner</span></div>
+            <div class="tut-title">Blender Grease Pencil — Learn in 6 Minutes!</div>
+            <p class="tut-excerpt">Everything you need to get started with Grease Pencil.</p>
             <div class="tut-footer">
-              <span>🕐 50 min watch</span>
-              <span class="watch-link">Watch Now →</span>
+              <span>🕐 6 min</span>
+              <a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;text-decoration:none;">Watch →</a>
             </div>
           </div>
-        </a>
+        </div>
 
-        <div class="side-tuts">
-          <!-- SIDE TUTORIAL 1 -->
-          <a href="tutorials.html" class="tut-card">
-            <div class="tut-thumb">🔷</div>
-            <div class="tut-meta">
-              <div class="tut-tags"><span class="tut-tag">Shaders</span></div>
-              <div class="tut-title">Write Your First Custom Shader in Godot 4</div>
-              <p class="tut-excerpt">No scary math — practical shader code that makes things look awesome.</p>
-              <div class="tut-footer">
-                <span>🕐 22 min</span>
-                <span class="watch-link">Watch →</span>
-              </div>
+        <div data-tutorial-id="uv-unwrap" data-tags="blender materials beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="uCaAJanwrds" onclick="window.location.href='tutorials.html'">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/uCaAJanwrds/maxresdefault.jpg" alt="UV Unwrap in Blender" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">4:33</span>
             </div>
-          </a>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags"><span class="tut-tag">Blender</span><span class="tut-tag">Materials</span></div>
+            <div class="tut-title">Learn to UV Unwrap in Blender</div>
+            <p class="tut-excerpt">UV unwrapping and adding textures to your 3D models.</p>
+            <div class="tut-footer">
+              <span>🕐 5 min</span>
+              <a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;text-decoration:none;">Watch →</a>
+            </div>
+          </div>
+        </div>
 
-          <!-- SIDE TUTORIAL 2 -->
-          <a href="tutorials.html" class="tut-card">
-            <div class="tut-thumb">🧊</div>
-            <div class="tut-meta">
-              <div class="tut-tags"><span class="tut-tag">Blender</span><span class="tut-tag">Godot</span></div>
-              <div class="tut-title">Export From Blender to Godot 4 Without Breaking Everything</div>
-              <p class="tut-excerpt">Scale, materials, animations — the complete import pipeline.</p>
-              <div class="tut-footer">
-                <span>🕐 28 min</span>
-                <span class="watch-link">Watch →</span>
-              </div>
+        <div data-tutorial-id="principled-bsdf" data-tags="blender materials beginner" class="tut-card">
+          <div class="tut-thumb-link" data-video="jGw283Fc4aE" onclick="window.location.href='tutorials.html'">
+            <div class="tut-thumb">
+              <img src="https://i.ytimg.com/vi/jGw283Fc4aE/maxresdefault.jpg" alt="Principled BSDF" loading="lazy">
+              <div class="play-btn">▶</div>
+              <span class="tut-duration">5:56</span>
             </div>
-          </a>
+          </div>
+          <div class="tut-meta">
+            <div class="tut-tags"><span class="tut-tag">Blender</span><span class="tut-tag">Materials</span></div>
+            <div class="tut-title">Guide to the Principled BSDF</div>
+            <p class="tut-excerpt">Make everything from rubber to glass with the Principled BSDF.</p>
+            <div class="tut-footer">
+              <span>🕐 6 min</span>
+              <a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;text-decoration:none;">Watch →</a>
+            </div>
+          </div>
         </div>
 
       </div>
-
-      <div style="text-align:center; margin-top:3rem;">
-        <a href="tutorials.html" class="btn-secondary">View All Tutorials →</a>
+      <div style="text-align:center;margin-top:3rem;">
+        <a href="tutorials.html" class="btn-primary">View All Tutorials →</a>
       </div>
     </div>
   </section>
 
-  <!-- NEWSLETTER -->
-  <section class="section-dark">
+  <!-- Newsletter -->
+  <section style="padding:5rem 0;">
     <div class="container">
       <div class="newsletter-inner">
         <span class="section-label">Stay in the Loop</span>
-        <h2 class="section-title">New tutorials drop all the time.</h2>
-        <p class="section-sub" style="margin:0 auto;">
-          Subscribe and I'll ping you when something new goes up — no spam, just 3D goodness.
-        </p>
+        <h2 class="section-title">New tutorials drop regularly.</h2>
+        <p class="section-sub" style="margin:0 auto;">Get notified when new content goes up — no spam, ever.</p>
         <form class="newsletter-form" onsubmit="handleSubscribe(event)">
           <input type="email" placeholder="your@email.com" required />
           <button type="submit" class="btn-primary">Subscribe</button>
@@ -413,129 +349,160 @@
   <footer>
     <a href="index.html" class="footer-logo">Bri The <span>3D</span> Guy</a>
     <ul class="footer-links">
-      <!-- EDIT: Your social links -->
       <li><a href="#" target="_blank">YouTube</a></li>
       <li><a href="#" target="_blank">Twitter / X</a></li>
       <li><a href="#" target="_blank">Discord</a></li>
       <li><a href="about.html">Contact</a></li>
     </ul>
-    <!-- EDIT: Year -->
     <span class="footer-copy">&copy; 2025 Bri The 3D Guy. All rights reserved.</span>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="js/xp.js"></script>
   <script src="js/main.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-  // ── 3D Infinite Poster Scroll Wall — scrolls UPWARD, fades at edges ──
-  (function() {
-    const THUMBNAILS = [
-      'dduAKv9G8DE','UrFgT7LMp9I','7zxj4kGN3NQ','v3dJ2UvV8sI','ijt-1CUFouA','DXVfmzvmK4c',
-      '-lKuSonXKqo','yCD80QSTWmg','z-l0xmczPhc','v_PK6CV_ktQ','zb6I3HiQ3Sk','ux4qXyJpavU',
-      'WPHjfOoZnXg','YLOrS1kgCpc','X2EuW1AgzTw','RokaDLSQT0M','qZj_TGe4nLo','JFzWbjJ8IIY',
-      '9Jv6sCBDZR4','zLAChQHot5Y','jGw283Fc4aE','dExoV7ZD5R8','uCaAJanwrds','inckC5b7zRk'
+  // ════════════════════════════════════════════════════════════
+  //  Tutorial thumbnail scroll background — Three.js
+  //  16:9 cards (landscape), perspective receding into distance,
+  //  smooth auto-scroll upward and looping.
+  // ════════════════════════════════════════════════════════════
+  (function () {
+    // All 24 YouTube video IDs from tutorials.html
+    const VIDEO_IDS = [
+      'dduAKv9G8DE', 'UrFgT7LMp9I', '7zxj4kGN3NQ', 'v3dJ2UvV8sI',
+      'ijt-1CUFouA', 'DXVfmzvmK4c', '-lKuSonXKqo', 'yCD80QSTWmg',
+      'z-l0xmczPhc', 'v_PK6CV_ktQ', 'zb6I3HiQ3Sk', 'ux4qXyJpavU',
+      'WPHjfOoZnXg', 'YLOrS1kgCpc', 'X2EuW1AgzTw', 'RokaDLSQT0M',
+      'qZj_TGe4nLo', 'JFzWbjJ8IIY', '9Jv6sCBDZR4', 'zLAChQHot5Y',
+      'jGw283Fc4aE', 'dExoV7ZD5R8', 'uCaAJanwrds', 'inckC5b7zRk'
     ];
 
-    const canvas = document.getElementById('poster-canvas');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    const COLS        = 9;
+    const ROWS        = 12;
+    const CARD_W      = 32;
+    const CARD_H      = 18;
+    const GAP_X       = 2.5;
+    const GAP_Y       = 2.5;
+    const SCROLL_SPD  = 0.06;
+
+    const wrap = document.getElementById('poster-canvas-wrap');
+    if (!wrap || typeof THREE === 'undefined') return;
+
+    // Scene
+    const scene    = new THREE.Scene();
+    scene.background = new THREE.Color(0x07070f);
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x05050f);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    wrap.appendChild(renderer.domElement);
 
-    const scene = new THREE.Scene();
+    // Camera — Star Wars crawl: grid lies flat, camera tilts forward so near rows are at bottom, far rows recede toward top
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2000);
+    camera.rotation.x = 1.1;  // ~63° forward tilt
+    camera.position.set(0, -55, 70);
 
-    // Camera positioned above looking down-forward — cards rise from bottom
-    const camera = new THREE.PerspectiveCamera(54, window.innerWidth / window.innerHeight, 0.1, 120);
-    camera.position.set(0, 7, 14);
-    camera.lookAt(0, 0, -4);
+    // Lighting — neutral white so thumbnails show true colour
+    scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    dirLight.position.set(0, 80, 60);
+    scene.add(dirLight);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-    const l1 = new THREE.PointLight(0xff5722, 2.8, 50); l1.position.set(8, 10, 6); scene.add(l1);
-    const l2 = new THREE.PointLight(0x00e5ff, 2.0, 50); l2.position.set(-8, 8, -6); scene.add(l2);
+    // Card geometry (16:9 plane)
+    const geo = new THREE.PlaneGeometry(CARD_W, CARD_H);
 
-    const COLS = 6, ROWS = 8;
-    const CW = 3.3, CH = 1.86, GX = 0.28, GY = 0.26;
-    const SX = CW + GX, SY = CH + GY;
-    const TOTAL_H = SY * ROWS;
+    // Build grid
+    const totalW    = COLS * CARD_W + (COLS - 1) * GAP_X;
+    const startX    = -totalW / 2 + CARD_W / 2;
+    const rowHeight = CARD_H + GAP_Y;
 
-    function roundedRectGeom(w, h, r) {
-      const s = new THREE.Shape();
-      s.moveTo(-w/2+r,-h/2); s.lineTo(w/2-r,-h/2);
-      s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r); s.lineTo(w/2,h/2-r);
-      s.quadraticCurveTo(w/2,h/2,w/2-r,h/2); s.lineTo(-w/2+r,h/2);
-      s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r); s.lineTo(-w/2,-h/2+r);
-      s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);
-      return new THREE.ShapeGeometry(s, 4);
-    }
+    const rowGroups  = [];
+    const loader     = new THREE.TextureLoader();
+    let   videoIndex = 0;
 
-    const geom = roundedRectGeom(CW, CH, 0.1);
-    const loader = new THREE.TextureLoader();
-    loader.crossOrigin = 'anonymous';
+    for (let row = 0; row < ROWS; row++) {
+      const group = new THREE.Group();
+      // Stagger alternate rows horizontally for a brick-like offset
+      const offsetX = (row % 2 === 0) ? 0 : (CARD_W + GAP_X) / 2;
 
-    const group = new THREE.Group();
-    // Tilt grid so it lies on a receding plane — cards scroll up from bottom
-    group.rotation.x = 0.20;
-    group.position.set(0, -2, -5);
-    scene.add(group);
+      for (let col = 0; col < COLS; col++) {
+        const id  = VIDEO_IDS[videoIndex % VIDEO_IDS.length];
+        videoIndex++;
 
-    const cards = [];
-    const totalW = SX * (COLS - 1);
-    const rng = (a, b) => Math.random() * (b - a) + a;
+        const url = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
-    for (let r = 0; r < ROWS; r++) {
-      for (let c = 0; c < COLS; c++) {
-        const idx = (r * COLS + c) % THUMBNAILS.length;
-        const tex = loader.load(`https://i.ytimg.com/vi/${THUMBNAILS[idx]}/mqdefault.jpg`);
-        tex.minFilter = THREE.LinearFilter;
+        // Placeholder material (dark card) that updates once texture loads
+        const mat = new THREE.MeshStandardMaterial({
+          color: 0x1a1a2e,
+          roughness: 0.9,
+        });
 
-        const mat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.22, metalness: 0.05 });
-        const mesh = new THREE.Mesh(geom, mat);
+        loader.load(
+          url,
+          (tex) => {
+            tex.encoding  = THREE.sRGBEncoding;
+            tex.minFilter = THREE.LinearFilter;
+            mat.map       = tex;
+            mat.color.set(0xffffff); // reset to neutral so texture shows true
+            mat.needsUpdate = true;
+          },
+          undefined,
+          () => { /* silently skip failed loads */ }
+        );
 
-        // Spread cards evenly across the full loop height so grid is full on load
-        const baseY = -(r / ROWS) * TOTAL_H;
-        mesh.position.set(c * SX - totalW / 2, baseY, rng(-0.2, 0.2));
-        mesh.rotation.z = rng(-0.035, 0.035);
-
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.x = startX + col * (CARD_W + GAP_X) + offsetX;
         group.add(mesh);
-        cards.push({ mesh, baseY });
       }
+
+      group.position.y = -row * rowHeight;
+      scene.add(group);
+      rowGroups.push(group);
     }
 
-    let offset = 0;
-    let mx = 0, cx = 0;
-    window.addEventListener('mousemove', e => {
-      mx = (e.clientX / window.innerWidth - 0.5) * 2;
-    });
+    // Total height one cycle occupies
+    const totalCycleH = ROWS * rowHeight;
 
+    // Scroll state — start mid-cycle so grid is already full on load
+    let scrollY = totalCycleH * 0.45;
+
+    // Resize
+    function onResize() {
+      const w = wrap.clientWidth;
+      const h = wrap.clientHeight;
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', onResize);
+    onResize();
+
+    // Animate
     function animate() {
       requestAnimationFrame(animate);
 
-      // Scroll UPWARD: offset increases → Y positions decrease (move up)
-      offset += 0.009;
+      scrollY += SCROLL_SPD;
 
-      cards.forEach(({ mesh, baseY }) => {
-        let y = baseY - offset * SY;
-        // Wrap: when card exits top, loop it back to the bottom
-        y = ((y % TOTAL_H) - TOTAL_H) % TOTAL_H;
-        if (y > 0) y -= TOTAL_H;
-        mesh.position.y = y;
+      // Move each row group upward, loop back to bottom when out of view
+      rowGroups.forEach((group, i) => {
+        // Base Y for this row
+        let y = -i * rowHeight + scrollY;
+
+        // Wrap: when a row scrolls above the camera (+large value), push it back below
+        const wrapThreshold  = rowHeight * ROWS * 0.6;
+        const bottomPosition = -(ROWS - 1) * rowHeight;
+
+        // Modulo-style looping
+        y = y % totalCycleH;
+        if (y > wrapThreshold) y -= totalCycleH;
+
+        group.position.y = y;
       });
-
-      // Subtle mouse parallax
-      cx += (mx - cx) * 0.04;
-      group.rotation.y = cx * 0.09;
-      camera.position.x = cx * 0.35;
 
       renderer.render(scene, camera);
     }
-
     animate();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
   })();
   </script>
 </body>
