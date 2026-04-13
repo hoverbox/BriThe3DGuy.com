@@ -1280,3 +1280,19 @@ footer {
 .tut-thumb-link:hover .play-btn {
   opacity: 1;
 }
+
+/* ── Logo image replacements ── */
+.nav-logo-img {
+  height: 65px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-logo-img {
+  height: 65px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+}

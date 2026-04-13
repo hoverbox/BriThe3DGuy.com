@@ -19,6 +19,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding-top: 4rem; /* extra buffer so content never hides behind fixed nav */
     }
 
     /* Three.js canvas sits full-bleed behind everything */
@@ -74,24 +75,45 @@
     .hero-content {
       position: relative;
       z-index: 10;
-      text-align: center;
-      padding: 0 1.5rem;
-      max-width: 800px;
+      padding: 5rem 1.5rem 2rem; /* top pad clears the fixed nav */
+      max-width: 960px;
+      width: 100%;
     }
 
     .hero-content .section-label {
       margin-bottom: 1rem;
+      display: block;
+      text-align: left;
+    }
+
+    /* Float layout: Brian floats right, text wraps around him */
+    .hero-brian {
+      float: right;
+      width: clamp(220px, 30vw, 380px);
+      margin: 0 0 0 2rem;
+      position: relative;
+      /* Nudge Brian up so he bleeds into the title area naturally */
+      margin-top: -1rem;
+      filter: drop-shadow(0 20px 60px rgba(255,87,34,0.18));
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-brian img {
+      width: 100%;
+      height: auto;
       display: block;
     }
 
     .hero-title {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-size: clamp(2.4rem, 5.5vw, 4.6rem);
       line-height: 1.05;
       margin-bottom: 1.25rem;
       letter-spacing: -0.02em;
       color: #fff;
+      text-align: left;
     }
 
     .hero-title span {
@@ -101,18 +123,16 @@
     .hero-sub {
       font-family: 'DM Sans', sans-serif;
       color: rgba(255,255,255,0.65);
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-size: clamp(1rem, 2vw, 1.15rem);
       line-height: 1.6;
       margin-bottom: 2.5rem;
-      max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
+      text-align: left;
     }
 
     .hero-ctas {
       display: flex;
       gap: 1rem;
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
     }
 
@@ -142,6 +162,26 @@
       border-color: rgba(255,255,255,0.4);
       color: #fff;
       background: rgba(255,255,255,0.06);
+    }
+
+    /* Clearfix so .hero-content wraps the float */
+    .hero-content::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    @media (max-width: 640px) {
+      .hero-brian {
+        float: none;
+        width: clamp(160px, 50vw, 220px);
+        margin: 0 auto 1.5rem;
+        display: block;
+      }
+      .hero-content .section-label,
+      .hero-title,
+      .hero-sub { text-align: center; }
+      .hero-ctas { justify-content: center; }
     }
 
     /* Nav override — make it transparent on the hero */
@@ -184,7 +224,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">Bri The <span>3D</span> Guy</a>
+    <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Bri The 3D Guy" class="nav-logo-img"></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="tutorials.html">Tutorials</a></li>
@@ -209,8 +249,13 @@
     <div class="hero-fade-sides"></div>
 
     <div class="hero-content">
+      <!-- Brian floats right — text wraps around him -->
+      <div class="hero-brian">
+        <img src="images/Brian.png" alt="Brian the 3D Guy mascot">
+      </div>
+
       <span class="section-label">Free • Open Source Tools • No Paywalls</span>
-      <h1 class="hero-title">Learn <span>Blender</span> &amp;<br>Godot From Scratch</h1>
+      <h1 class="hero-title">Learn <span>Blender</span> &amp; Godot From Scratch</h1>
       <p class="hero-sub">
         Short, beginner-friendly tutorials that actually explain what's happening —
         no jargon, no skipped steps, no 4-hour slogs.
@@ -347,7 +392,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <a href="index.html" class="footer-logo">Bri The <span>3D</span> Guy</a>
+    <a href="index.html" class="footer-logo"><img src="images/logo.png" alt="Bri The 3D Guy" class="footer-logo-img"></a>
     <ul class="footer-links">
       <li><a href="#" target="_blank">YouTube</a></li>
       <li><a href="#" target="_blank">Twitter / X</a></li>
