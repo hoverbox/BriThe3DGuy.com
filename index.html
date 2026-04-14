@@ -218,6 +218,39 @@
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50%       { transform: translateX(-50%) translateY(6px); }
     }
+
+    /* ── Latest Tutorials Carousel ─────────────────────────────── */
+    .latest-tutorials-section { padding-bottom: 0; }
+
+    #latest-tutorials-carousel {
+      overflow: hidden;
+      margin-top: 2.5rem;
+      /* fade edges */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    #latest-tutorials-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      /* speed: 1 card (~300px+gap) per 4s → 8 cards ≈ 38s total */
+      animation: carousel-scroll 38s linear infinite;
+    }
+
+    @keyframes carousel-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .latest-carousel-card {
+      flex: 0 0 300px;
+      width: 300px;
+    }
+
+    @media (max-width: 600px) {
+      .latest-carousel-card { flex: 0 0 260px; width: 260px; }
+    }
   </style>
 </head>
 <body>
@@ -304,74 +337,17 @@
     </div>
   </section>
 
-  <!-- Latest tutorials preview -->
-  <section class="section-dark">
+  <!-- Latest tutorials carousel — populated by TUTORIALS array in main.js -->
+  <section class="section-dark latest-tutorials-section">
     <div class="container">
       <span class="section-label">Just Published</span>
       <h2 class="section-title">Latest Tutorials</h2>
-      <div class="tutorials-grid-3" style="margin-top:2.5rem;">
-
-        <div data-tutorial-id="grease-pencil" data-tags="blender beginner" class="tut-card">
-          <div class="tut-thumb-link" data-video="inckC5b7zRk" onclick="window.location.href='tutorials.html'">
-            <div class="tut-thumb">
-              <img src="https://i.ytimg.com/vi/inckC5b7zRk/maxresdefault.jpg" alt="Blender Grease Pencil" loading="lazy">
-              <div class="play-btn">▶</div>
-              <span class="tut-duration">6:03</span>
-            </div>
-          </div>
-          <div class="tut-meta">
-            <div class="tut-tags"><span class="tut-tag">Blender</span><span class="tut-tag">Beginner</span></div>
-            <div class="tut-title">Blender Grease Pencil — Learn in 6 Minutes!</div>
-            <p class="tut-excerpt">Everything you need to get started with Grease Pencil.</p>
-            <div class="tut-footer">
-              <span>🕐 6 min</span>
-              <a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;text-decoration:none;">Watch →</a>
-            </div>
-          </div>
-        </div>
-
-        <div data-tutorial-id="uv-unwrap" data-tags="blender materials beginner" class="tut-card">
-          <div class="tut-thumb-link" data-video="uCaAJanwrds" onclick="window.location.href='tutorials.html'">
-            <div class="tut-thumb">
-              <img src="https://i.ytimg.com/vi/uCaAJanwrds/maxresdefault.jpg" alt="UV Unwrap in Blender" loading="lazy">
-              <div class="play-btn">▶</div>
-              <span class="tut-duration">4:33</span>
-            </div>
-          </div>
-          <div class="tut-meta">
-            <div class="tut-tags"><span class="tut-tag">Blender</span><span class="tut-tag">Materials</span></div>
-            <div class="tut-title">Learn to UV Unwrap in Blender</div>
-            <p class="tut-excerpt">UV unwrapping and adding textures to your 3D models.</p>
-            <div class="tut-footer">
-              <span>🕐 5 min</span>
-              <a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;text-decoration:none;">Watch →</a>
-            </div>
-          </div>
-        </div>
-
-        <div data-tutorial-id="principled-bsdf" data-tags="blender materials beginner" class="tut-card">
-          <div class="tut-thumb-link" data-video="jGw283Fc4aE" onclick="window.location.href='tutorials.html'">
-            <div class="tut-thumb">
-              <img src="https://i.ytimg.com/vi/jGw283Fc4aE/maxresdefault.jpg" alt="Principled BSDF" loading="lazy">
-              <div class="play-btn">▶</div>
-              <span class="tut-duration">5:56</span>
-            </div>
-          </div>
-          <div class="tut-meta">
-            <div class="tut-tags"><span class="tut-tag">Blender</span><span class="tut-tag">Materials</span></div>
-            <div class="tut-title">Guide to the Principled BSDF</div>
-            <p class="tut-excerpt">Make everything from rubber to glass with the Principled BSDF.</p>
-            <div class="tut-footer">
-              <span>🕐 6 min</span>
-              <a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;text-decoration:none;">Watch →</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div style="text-align:center;margin-top:3rem;">
-        <a href="tutorials.html" class="btn-primary">View All Tutorials →</a>
-      </div>
+    </div>
+    <div id="latest-tutorials-carousel">
+      <div id="latest-tutorials-track"></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="tutorials.html" class="btn-primary">View All Tutorials →</a>
     </div>
   </section>
 
@@ -423,14 +399,8 @@
   //     a background element.
   // ════════════════════════════════════════════════════════════
   (function () {
-    const VIDEO_IDS = [
-      'dduAKv9G8DE', 'UrFgT7LMp9I', '7zxj4kGN3NQ', 'v3dJ2UvV8sI',
-      'ijt-1CUFouA', 'DXVfmzvmK4c', '-lKuSonXKqo', 'yCD80QSTWmg',
-      'z-l0xmczPhc', 'v_PK6CV_ktQ', 'zb6I3HiQ3Sk', 'ux4qXyJpavU',
-      'WPHjfOoZnXg', 'YLOrS1kgCpc', 'X2EuW1AgzTw', 'RokaDLSQT0M',
-      'qZj_TGe4nLo', 'JFzWbjJ8IIY', '9Jv6sCBDZR4', 'zLAChQHot5Y',
-      'jGw283Fc4aE', 'dExoV7ZD5R8', 'uCaAJanwrds', 'inckC5b7zRk'
-    ];
+    // HERO_VIDEO_IDS is defined in main.js — edit TUTORIALS there to update this.
+    const VIDEO_IDS = (typeof HERO_VIDEO_IDS !== 'undefined') ? HERO_VIDEO_IDS : [];
 
     const COLS       = 9;
     const ROWS       = 12;   // enough rows to reach the top fade zone in perspective
