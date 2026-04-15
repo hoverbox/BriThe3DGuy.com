@@ -3,13 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tools — Bri The 3D Guy</title>
-  <meta name="description" content="The free tools and software used in every Bri The 3D Guy tutorial." />
+  <title>Resources — Bri The 3D Guy</title>
+  <meta name="description" content="Guides, tools, and free software used in every Bri The 3D Guy tutorial." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Featured tool card (bigger) */
+
+    .gumroad-section { margin-bottom: 5rem; }
+
+    /* ============================================================
+       PRODUCT GRID
+    ============================================================ */
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .product-card {
+      background: var(--brand-card);
+      border: 1px solid rgba(255,87,34,0.2);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-thumb {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover .product-thumb img { transform: scale(1.04); }
+
+    .product-info {
+      padding: 1rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .product-title {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--brand-text);
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--brand-muted);
+      flex: 1;
+    }
+
+    /* ============================================================
+       TOOLS SECTION
+    ============================================================ */
+
     .tool-card-featured {
       background: var(--brand-card);
       border: 1px solid rgba(255,87,34,0.3);
@@ -62,7 +129,6 @@
 
     .tools-section-title {
       font-family: var(--font-head);
-      font-size: 1.2rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
       color: var(--brand-muted);
@@ -73,6 +139,7 @@
 
     @media (max-width: 600px) {
       .tool-card-featured { flex-direction: column; gap: 1rem; }
+      .gumroad-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -85,7 +152,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="tutorials.html">Tutorials</a></li>
       <li><a href="topics.html">Topics</a></li>
-      <li><a href="tools.html">Tools</a></li>
+      <li><a href="resources.html">Resources</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="progress.html">⚡ Progress</a></li>
       <li><a href="about.html#newsletter" class="nav-cta">Stay Updated</a></li>
@@ -98,33 +165,47 @@
   <!-- PAGE HERO -->
   <div class="page-hero">
     <div class="page-hero-glow"></div>
-    <span class="section-label">The Stack</span>
-    <h1>Tools I Teach <span>&amp; Use</span></h1>
-    <p>Every tool on this page is free. No excuses not to start.</p>
+    <span class="section-label">The Library</span>
+    <h1>Resources <span>&amp; Tools</span></h1>
+    <p>Guides, downloads, and free software to accelerate your learning.</p>
   </div>
 
   <section style="padding-top:2rem;">
     <div class="container">
 
       <!-- ============================================================
+           GUMROAD PRODUCTS — To add more products, copy one
+           .product-card block and paste it inside .product-grid.
+           Swap the image src, title, desc, and Gumroad href.
+      ============================================================ -->
+      <script src="https://gumroad.com/js/gumroad.js"></script>
+      <div class="gumroad-section">
+        <div class="tools-section-title">Guides &amp; Downloads</div>
+
+        <div class="product-grid">
+
+          <!-- ✏️ PRODUCT CARD — Copy this block to add more products -->
+          <div class="product-card">
+            <a href="https://brithe3dguy.gumroad.com/l/ucueq" target="_blank" class="product-thumb">
+              <img src="images/graphics_thumb.png" alt="Pocket Guide to 3D Graphics" />
+            </a>
+            <div class="product-info">
+              <div class="product-title">Your Product Title</div>
+              <div class="product-desc">Short description of what this guide covers.</div>
+              <a class="gumroad-button" href="https://brithe3dguy.gumroad.com/l/ucueq">Free On</a>
+            </div>
+          </div>
+
+          <!-- ADD MORE PRODUCT CARDS HERE -->
+
+        </div>
+      </div>
+
+      <!-- ============================================================
            CORE TOOLS — The must-haves
       ============================================================ -->
       <div class="tools-section">
         <div class="tools-section-title">Core Software</div>
-
-        <!-- FEATURED TOOL — Godot -->
-        <a href="https://godotengine.org" target="_blank" class="tool-card-featured">
-          <div class="tool-logo">🕹️</div>
-          <div>
-            <div class="tool-name">Godot Engine 4</div>
-            <p class="tool-desc">
-              Our game engine of choice. Godot is completely free and open-source — no royalties, 
-              no subscriptions, no strings attached. Powerful enough for serious projects and 
-              approachable enough for total beginners. Everything we build ends up here.
-            </p>
-            <span class="tool-badge">Primary Engine</span>
-          </div>
-        </a>
 
         <!-- FEATURED TOOL — Blender -->
         <a href="https://www.blender.org" target="_blank" class="tool-card-featured">
@@ -139,6 +220,20 @@
             <span class="tool-badge">3D Creation Suite</span>
           </div>
         </a>
+        
+                <!-- FEATURED TOOL — Godot -->
+        <a href="https://godotengine.org" target="_blank" class="tool-card-featured">
+          <div class="tool-logo">🕹️</div>
+          <div>
+            <div class="tool-name">Godot Engine 4</div>
+            <p class="tool-desc">
+              Our game engine of choice. Godot is completely free and open-source — no royalties, 
+              no subscriptions, no strings attached. Powerful enough for serious projects and 
+              approachable enough for total beginners. Everything we build ends up here.
+            </p>
+            <span class="tool-badge">Primary Engine</span>
+          </div>
+        </a>
       </div>
 
       <!-- ============================================================
@@ -148,7 +243,6 @@
         <div class="tools-section-title">Supporting Tools</div>
         <div class="tools-grid">
 
-          <!-- TOOL CARD — Copy to add more -->
           <a href="https://krita.org" target="_blank" class="tool-card">
             <div class="tool-logo">🖌️</div>
             <div class="tool-name">Krita</div>
@@ -171,12 +265,6 @@
             <div class="tool-logo">📚</div>
             <div class="tool-name">Godot Docs</div>
             <div class="tool-desc">The official docs are actually great. Bookmark them on day one.</div>
-          </a>
-
-          <a href="https://www.mixamo.com" target="_blank" class="tool-card">
-            <div class="tool-logo">🏃</div>
-            <div class="tool-name">Mixamo</div>
-            <div class="tool-desc">Free character animations from Adobe. Works great with Godot.</div>
           </a>
 
           <a href="https://polyhaven.com" target="_blank" class="tool-card">
@@ -219,5 +307,6 @@
 
   <script src="js/xp.js"></script>
   <script src="js/main.js"></script>
+
 </body>
 </html>
