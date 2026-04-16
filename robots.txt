@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brithe3dguy.com/sitemap.xml
