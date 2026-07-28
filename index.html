@@ -255,34 +255,81 @@
     /* ── Latest Tutorials Carousel ─────────────────────────────── */
     .latest-tutorials-section { padding-bottom: 0; }
 
-    #latest-tutorials-carousel {
-      overflow: hidden;
+    .latest-carousel-shell {
+      position: relative;
       margin-top: 2.5rem;
-      /* fade edges */
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    #latest-tutorials-carousel {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      cursor: grab;
+      overscroll-behavior-inline: contain;
+      padding: 0 max(2.8rem, calc((100vw - 1180px) / 2));
+    }
+
+    #latest-tutorials-carousel::-webkit-scrollbar { display: none; }
+    #latest-tutorials-carousel.is-dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
+      scroll-snap-type: none;
+      user-select: none;
     }
 
     #latest-tutorials-track {
       display: flex;
       gap: 1.5rem;
       width: max-content;
-      /* speed: 1 card (~300px+gap) per 4s → 8 cards ≈ 38s total */
-      animation: carousel-scroll 38s linear infinite;
-    }
-
-    @keyframes carousel-scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
     }
 
     .latest-carousel-card {
-      flex: 0 0 300px;
-      width: 300px;
+      flex: 0 0 clamp(270px, 22vw, 320px);
+      width: clamp(270px, 22vw, 320px);
+      scroll-snap-align: start;
     }
 
-    @media (max-width: 600px) {
-      .latest-carousel-card { flex: 0 0 260px; width: 260px; }
+    .carousel-control {
+      position: absolute;
+      z-index: 4;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(12,13,20,.9);
+      color: #fff;
+      font-size: 1.4rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, opacity .2s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .carousel-control:hover,
+    .carousel-control:focus-visible {
+      transform: translateY(-50%) scale(1.08);
+      border-color: var(--brand-primary);
+      background: var(--brand-primary);
+      outline: none;
+    }
+    .carousel-control:disabled { opacity: .35; cursor: default; }
+    .carousel-control.prev { left: 1rem; }
+    .carousel-control.next { right: 1rem; }
+
+    @media (max-width: 700px) {
+      #latest-tutorials-carousel { padding-inline: 1.2rem; }
+      .latest-carousel-card { flex-basis: min(82vw, 300px); width: min(82vw, 300px); }
+      .carousel-control { width: 2.65rem; height: 2.65rem; }
+      .carousel-control.prev { left: .35rem; }
+      .carousel-control.next { right: .35rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #latest-tutorials-carousel { scroll-behavior: auto; }
     }
   </style>
 <style>
@@ -353,8 +400,12 @@
 <span class="section-label">Just Published</span>
 <h2 class="section-title">Latest Tutorials</h2>
 </div>
-<div id="latest-tutorials-carousel">
+<div class="latest-carousel-shell" aria-label="Latest tutorials carousel">
+<button class="carousel-control prev" id="latest-tutorials-prev" type="button" aria-label="Show previous tutorials">‹</button>
+<div id="latest-tutorials-carousel" tabindex="0">
 <div id="latest-tutorials-track"></div>
+</div>
+<button class="carousel-control next" id="latest-tutorials-next" type="button" aria-label="Show next tutorials">›</button>
 </div>
 <div style="text-align:center;margin-top:2.5rem;">
 <a class="btn-primary" href="tutorials.html">View All Tutorials →</a>
