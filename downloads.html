@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Downloads — Bri The 3D Guy</title>
+<meta content="Free guides, downloads, and software for Blender and Godot 4. Everything used in Bri The 3D Guy tutorials — 100% free, no paywalls, no trials." name="description"/>
+<!-- Canonical -->
+<link href="https://brithe3dguy.com/downloads.html" rel="canonical"/>
+<!-- Favicon -->
+<link href="images/logo.png" rel="icon" type="image/png"/>
+<link href="images/logo.png" rel="apple-touch-icon"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="https://brithe3dguy.com/downloads.html" property="og:url"/>
+<meta content="Free Blender &amp; Godot Resources | Tools &amp; Downloads | Bri The 3D Guy" property="og:title"/>
+<meta content="Free guides, downloads, and software for Blender and Godot 4. Everything used in Bri The 3D Guy tutorials — 100% free." property="og:description"/>
+<meta content="https://brithe3dguy.com/images/og-preview.jpg" property="og:image"/>
+<meta content="Bri The 3D Guy" property="og:site_name"/>
+<!-- Twitter Card -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Free Blender &amp; Godot Resources | Bri The 3D Guy" name="twitter:title"/>
+<meta content="Free guides, downloads, and software for Blender and Godot 4. No paywalls, ever." name="twitter:description"/>
+<meta content="https://brithe3dguy.com/images/og-preview.jpg" name="twitter:image"/>
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Free Blender & Godot Resources",
+    "url": "https://brithe3dguy.com/downloads.html",
+    "description": "Free guides, downloads, and tools for Blender and Godot 4 used in Bri The 3D Guy tutorials.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Bri The 3D Guy",
+      "url": "https://brithe3dguy.com"
+    }
+  }
+  </script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Syne:wght@400;700;800&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<style>
+
+    .gumroad-section { margin-bottom: 5rem; }
+
+    /* ============================================================
+       PRODUCT GRID
+    ============================================================ */
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .product-card {
+      background: var(--brand-card);
+      border: 1px solid rgba(255,87,34,0.2);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-thumb {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover .product-thumb img { transform: scale(1.04); }
+
+    .product-info {
+      padding: 1rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .product-title {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--brand-text);
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--brand-muted);
+      flex: 1;
+    }
+
+    /* ============================================================
+       TOOLS SECTION
+    ============================================================ */
+
+    .tool-card-featured {
+      background: var(--brand-card);
+      border: 1px solid rgba(255,87,34,0.3);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      text-decoration: none;
+      color: var(--brand-text);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 1.5rem;
+    }
+
+    .tool-card-featured:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(255,87,34,0.15);
+    }
+
+    .tool-card-featured .tool-logo {
+      font-size: 4rem;
+      flex-shrink: 0;
+    }
+
+    .tool-card-featured .tool-name {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .tool-card-featured .tool-desc {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 540px;
+    }
+
+    .tool-badge {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--brand-primary);
+      background: rgba(255,87,34,0.12);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+    }
+
+    .tools-section { margin-bottom: 4rem; }
+
+    .tools-section-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--brand-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .tool-card-featured { flex-direction: column; gap: 1rem; }
+      .gumroad-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="site-nav">
+<a class="nav-logo" href="index.html"><img alt="Bri The 3D Guy" class="nav-logo-img" src="images/logo.png"/></a>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="3d-graphics.html">3D Graphics</a></li>
+
+<li><a href="game-development.html">Game Development</a></li>
+<li><a href="downloads.html">Downloads</a></li>
+<li><a href="progress.html">⚡ Progress</a></li>
+<li><a class="nav-cta" href="index.html#newsletter">Stay Updated</a></li>
+</ul>
+<button aria-label="Menu" class="nav-hamburger"><span></span><span></span><span></span></button>
+</nav>
+<!-- PAGE HERO -->
+<header class="v2-hub-hero v2-theme-downloads"><div class="v2-hub-glow"></div><div class="container"><span class="section-label">Free Tools &amp; Resources</span><h1>Downloads</h1><p>Guides, addons, project files, and useful resources organized in one place.</p></div></header>
+<section class="v2-section" style="padding-bottom:2rem"><div class="container"><span class="section-label">Find What You Need</span><div class="v2-library-heading"><h2 class="section-title">Browse Downloads</h2><span class="v2-library-count" data-download-count=""></span></div><div class="tutorial-filter-row compact-filter-row" data-download-filters=""></div><div class="product-grid" data-download-library=""></div></div></section><section id="tools" style="padding-top:2rem;">
+<div class="container">
+<!-- ============================================================
+           GUMROAD PRODUCTS — To add more products, copy one
+           .product-card block and paste it inside .product-grid.
+           Swap the image src, title, desc, and Gumroad href.
+      ============================================================ -->
+<!-- ============================================================
+           CORE TOOLS — The must-haves
+      ============================================================ -->
+<div class="tools-section">
+<div class="tools-section-title">Core Software</div>
+<!-- FEATURED TOOL — Blender -->
+<a class="tool-card-featured" href="https://www.blender.org" target="_blank">
+<div class="tool-logo">🔵</div>
+<div>
+<div class="tool-name">Blender</div>
+<p class="tool-desc">
+              Free, open-source, and genuinely world-class. Blender is where we model, rig, 
+              texture, and animate everything before sending it into Godot. It can feel 
+              overwhelming at first — that's exactly why we break it down step by step.
+            </p>
+<span class="tool-badge">3D Creation Suite</span>
+</div>
+</a>
+<!-- FEATURED TOOL — Godot -->
+<a class="tool-card-featured" href="https://godotengine.org" target="_blank">
+<div class="tool-logo">🕹️</div>
+<div>
+<div class="tool-name">Godot Engine 4</div>
+<p class="tool-desc">
+              Our game engine of choice. Godot is completely free and open-source — no royalties, 
+              no subscriptions, no strings attached. Powerful enough for serious projects and 
+              approachable enough for total beginners. Everything we build ends up here.
+            </p>
+<span class="tool-badge">Primary Engine</span>
+</div>
+</a>
+</div>
+<!-- ============================================================
+           SUPPORTING TOOLS
+      ============================================================ -->
+<div class="tools-section">
+<div class="tools-section-title">Supporting Tools</div>
+<div class="tools-grid">
+<a class="tool-card" href="https://krita.org" target="_blank">
+<div class="tool-logo">🖌️</div>
+<div class="tool-name">Krita</div>
+<div class="tool-desc">Free painting app for concept art and hand-painted textures.</div>
+</a>
+<a class="tool-card" href="https://www.gimp.org" target="_blank">
+<div class="tool-logo">🎨</div>
+<div class="tool-name">GIMP</div>
+<div class="tool-desc">Free image editor for texture cleanup, normal map tweaks, and more.</div>
+</a>
+<a class="tool-card" href="https://github.com" target="_blank">
+<div class="tool-logo">🐙</div>
+<div class="tool-name">GitHub</div>
+<div class="tool-desc">Version control for your Godot projects. Start good habits early.</div>
+</a>
+<a class="tool-card" href="https://docs.godotengine.org" target="_blank">
+<div class="tool-logo">📚</div>
+<div class="tool-name">Godot Docs</div>
+<div class="tool-desc">The official docs are actually great. Bookmark them on day one.</div>
+</a>
+<a class="tool-card" href="https://polyhaven.com" target="_blank">
+<div class="tool-logo">🏔️</div>
+<div class="tool-name">Poly Haven</div>
+<div class="tool-desc">100% free HDRIs, textures, and 3D models. All CC0 licensed.</div>
+</a>
+<!-- ADD MORE TOOLS HERE -->
+</div>
+</div>
+<!-- HELPFUL NOTE -->
+<div style="background: var(--brand-card); border: 1px solid var(--brand-card-border); border-radius: var(--radius); padding: 2rem; margin-top: 2rem;">
+<h3 style="font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem;">
+          💡 A note on the tools
+        </h3>
+<p style="color: var(--brand-muted); font-size: 0.95rem; line-height: 1.65;">
+          Every tool on this page is completely free. I chose this stack specifically so that 
+          anyone — regardless of budget — can follow along with every single tutorial on this site.
+          No trial versions, no paywalls. Just download and go.
+        </p>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer>
+<a class="footer-logo" href="index.html"><img alt="Bri The 3D Guy" class="footer-logo-img" src="images/logo.png"/></a>
+<ul class="footer-links">
+<li><a href="3d-graphics.html">3D Graphics</a></li>
+
+<li><a href="game-development.html">Game Development</a></li>
+<li><a href="downloads.html">Downloads</a></li>
+<li><a href="index.html#meet-brian">Meet Brian</a></li>
+</ul>
+<span class="footer-copy">© 2026 Bri The 3D Guy. All rights reserved.</span>
+</footer>
+<script src="js/xp.js"></script>
+<script src="js/main.js"></script>
+<script src="data/downloads-data.js"></script><script src="js/download-library.js"></script></body>
+</html>

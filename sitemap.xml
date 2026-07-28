@@ -1,46 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://brithe3dguy.com/</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://brithe3dguy.com/tutorials.html</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://brithe3dguy.com/resources.html</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://brithe3dguy.com/about.html</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://brithe3dguy.com/topics.html</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://brithe3dguy.com/progress.html</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
+  <url><loc>https://brithe3dguy.com/</loc></url>
+  <url><loc>https://brithe3dguy.com/3d-graphics.html</loc></url>
+  <url><loc>https://brithe3dguy.com/game-development.html</loc></url>
+  <url><loc>https://brithe3dguy.com/downloads.html</loc></url>
+  <url><loc>https://brithe3dguy.com/tutorials.html</loc></url>
+  <url><loc>https://brithe3dguy.com/progress.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/index.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/actuators-2d.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/actuators-3d.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/actuators-common.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/actuators-ui.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/advanced.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/brick-reference.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/controllers-2d.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/controllers-3d.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/controllers-ui.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/controllers.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/debugging.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/first-chain.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/getting-started.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/graph-export.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/index.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/interface.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/sensors-2d.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/sensors-3d.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/sensors-ui.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/sensors.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/troubleshooting.html</loc></url>
+  <url><loc>https://brithe3dguy.com/logic-bricks/docs/variables-states.html</loc></url>
+  <url><loc>https://brithe3dguy.com/game-development-tutorials.html</loc></url>
 </urlset>

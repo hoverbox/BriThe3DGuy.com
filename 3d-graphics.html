@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/><title>3D Graphics — Bri The 3D Guy</title><meta content="Browse all Blender and 3D graphics tutorials by topic, including beginner skills, modeling tools, modifiers, and materials." name="description"/><link href="https://brithe3dguy.com/3d-graphics.html" rel="canonical"/><link href="images/logo.png" rel="icon" type="image/png"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Syne:wght@400;700;800&amp;family=DM+Sans:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/><link href="css/style.css" rel="stylesheet"/><style>
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .filter-btn {
+      background: transparent;
+      color: var(--brand-muted);
+      border: 1px solid var(--brand-card-border);
+      border-radius: 50px;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
+      background: rgba(255,87,34,0.08);
+    }
+
+    /* Real thumbnail styles */
+    .tut-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-radius: var(--radius) var(--radius) 0 0;
+      background: #0d0d18;
+    }
+    .tut-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .tut-card:hover .tut-thumb img {
+      transform: scale(1.04);
+    }
+    .tut-thumb .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-size: 2.8rem;
+    }
+    .tut-card:hover .play-btn {
+      opacity: 1;
+    }
+    .tut-duration {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.6rem;
+      background: rgba(0,0,0,0.82);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      letter-spacing: 0.03em;
+    }
+  </style><style>
+.v2-topic-filter{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0 2.25rem;padding:0;background:none;border:0}
+.v2-topic-filter .filter-btn{min-height:0;padding:.65rem 1rem;border-radius:999px;font-size:.82rem;line-height:1.1}
+.v2-filter-intro{max-width:720px;margin-top:.65rem}
+.v2-all-tutorials-title{font-family:var(--font-head);font-size:1.15rem;margin:0 0 1rem;color:var(--brand-text)}
+#categories.v2-section{padding-top:4rem}
+@media(max-width:620px){.v2-topic-filter{gap:.5rem}.v2-topic-filter .filter-btn{padding:.58rem .78rem;font-size:.76rem}.tutorials-grid-3{grid-template-columns:1fr}}
+</style></head><body><nav class="site-nav"><a class="nav-logo" href="index.html"><img alt="Bri The 3D Guy" class="nav-logo-img" src="images/logo.png"/></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="3d-graphics.html">3D Graphics</a></li><li><a href="game-development.html">Game Development</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="progress.html">⚡ Progress</a></li><li><a class="nav-cta" href="index.html#newsletter">Stay Updated</a></li></ul><button aria-label="Menu" class="nav-hamburger"><span></span><span></span><span></span></button></nav><div class="container"><nav aria-label="Breadcrumb" class="v2-breadcrumbs"><a href="index.html">Home</a><span aria-hidden="true">›</span><span aria-current="page">3D Graphics</span></nav></div><header class="v2-hub-hero v2-theme-graphics" style="padding-top:4rem"><div class="v2-hub-glow"></div><div class="container"><span class="section-label">3D Graphics</span><h1>Learn 3D Graphics</h1><p>Build practical Blender skills and quickly filter the complete tutorial library by topic.</p></div></header><main><section class="section-dark v2-section" id="categories"><div class="container"><span class="section-label">Tutorial Library</span><h2 class="section-title">Browse by Topic</h2><p class="section-sub v2-filter-intro">Choose a topic to show only matching tutorials, or leave All selected to browse everything.</p><div class="filter-bar v2-topic-filter" data-topic-filters="3D Graphics"></div><h3 class="v2-all-tutorials-title">All Tutorials </h3><div class="tutorials-grid-3" data-tutorial-section="3D Graphics"></div></div></section></main><div id="video-modal" onclick="closeVideoOnBackdrop(event)">
+<div class="video-modal-inner">
+<div class="video-modal-top">
+<div class="video-modal-title" id="video-modal-title"></div>
+<button class="video-modal-close" onclick="closeVideo()" title="Close">✕</button>
+</div>
+<div class="video-modal-frame">
+<iframe allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen="" id="video-modal-iframe" src=""></iframe>
+</div>
+</div>
+</div><footer><a class="footer-logo" href="index.html"><img alt="Bri The 3D Guy" class="footer-logo-img" src="images/logo.png"/></a><ul class="footer-links"><li><a href="3d-graphics.html">3D Graphics</a></li><li><a href="game-development.html">Game Development</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="index.html#meet-brian">Meet Brian</a></li></ul><span class="footer-copy">© 2026 Bri The 3D Guy. All rights reserved.</span></footer><script src="data/tutorials-data.js"></script><script src="js/tutorial-library.js"></script><script src="js/xp.js"></script><script src="js/main.js"></script></body></html>
