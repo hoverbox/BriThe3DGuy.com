@@ -40,7 +40,7 @@
   </script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Syne:wght@400;700;800&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
+<link href="css/style.css?v=20260728-firefox-nav-fix" rel="stylesheet"/>
 <style>
     /* ── Hero wrapper ───────────────────────────────────────────── */
     .home-hero-wrap {
@@ -403,11 +403,16 @@
 <div class="x-feed-section">
 <span class="section-label">Recent Posts</span>
 <h3 class="x-feed-title">See what I’m working on now.</h3>
-<div class="x-timeline-shell" aria-label="Recent posts from BriThe3DGuy on X">
+<div class="x-timeline-shell" id="x-timeline-shell" aria-label="Recent posts from BriThe3DGuy on X">
 <a class="twitter-timeline" data-height="680" data-theme="dark" data-chrome="noheader nofooter transparent" href="https://twitter.com/brithe3dguy">Posts by @BriThe3DGuy</a>
 <noscript><p><a href="https://x.com/brithe3dguy">View @BriThe3DGuy on X</a></p></noscript>
 </div>
-<p class="x-embed-note">The feed may be hidden by privacy extensions, school filters, or browser tracking protection. The follow button above always opens the profile directly.</p>
+<div class="x-feed-fallback" id="x-feed-fallback" hidden>
+<span class="x-feed-fallback-mark">X</span>
+<div><h4>X could not load the live feed.</h4><p>Some browsers, privacy tools, and networks block X's embedded timeline. You can still see every update directly on the profile.</p></div>
+<a class="btn-secondary" href="https://x.com/brithe3dguy" target="_blank" rel="noopener noreferrer">View posts on X →</a>
+</div>
+<p class="x-embed-note" id="x-embed-note">The live feed is provided by X and may be blocked by browser tracking protection or network filters.</p>
 </div>
 </div>
 </section>
@@ -425,6 +430,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="js/xp.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script>
+(function () {
+  const shell = document.getElementById('x-timeline-shell');
+  const fallback = document.getElementById('x-feed-fallback');
+  const note = document.getElementById('x-embed-note');
+  if (!shell || !fallback) return;
+
+  let resolved = false;
+  const showFeed = () => {
+    if (resolved) return;
+    resolved = true;
+    shell.classList.add('is-loaded');
+  };
+  const showFallback = () => {
+    if (resolved) return;
+    resolved = true;
+    shell.hidden = true;
+    fallback.hidden = false;
+    if (note) note.hidden = true;
+  };
+  const detect = () => {
+    if (shell.querySelector('iframe')) showFeed();
+  };
+  const observer = new MutationObserver(detect);
+  observer.observe(shell, { childList: true, subtree: true });
+  detect();
+  window.setTimeout(() => {
+    observer.disconnect();
+    if (!shell.querySelector('iframe')) showFallback();
+  }, 8000);
+})();
+</script>
 <script src="data/tutorials-data.js"></script><script src="js/main.js"></script>
 <script>
   // ════════════════════════════════════════════════════════════
