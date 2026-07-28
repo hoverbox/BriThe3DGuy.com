@@ -1681,3 +1681,53 @@ footer {
 }
 .v2-breadcrumbs::before,
 .v2-breadcrumbs::after { content: none !important; display: none !important; }
+
+/* Featured X post: a single selected post replaces the unreliable profile timeline. */
+.x-featured-post {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.x-featured-placeholder,
+.x-single-post-fallback {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--brand-card-border);
+  border-radius: 18px;
+  background: var(--brand-card);
+}
+.x-featured-placeholder h4,
+.x-single-post-fallback h4 {
+  margin: 0 0 .35rem;
+  color: var(--brand-text);
+  font-size: 1.15rem;
+}
+.x-featured-placeholder p,
+.x-single-post-fallback p {
+  margin: 0;
+  color: var(--brand-muted);
+  line-height: 1.55;
+}
+.x-featured-placeholder code {
+  color: var(--brand-text);
+}
+.x-single-post-shell {
+  display: flex;
+  justify-content: center;
+  min-height: 180px;
+}
+.x-single-post-shell iframe {
+  width: 100% !important;
+  max-width: 550px !important;
+  margin: 0 auto !important;
+}
+.x-single-post-fallback[hidden] { display: none !important; }
+@media (max-width: 720px) {
+  .x-featured-placeholder,
+  .x-single-post-fallback { grid-template-columns: auto 1fr; }
+  .x-featured-placeholder .btn-secondary,
+  .x-single-post-fallback .btn-secondary { grid-column: 1 / -1; text-align: center; }
+}

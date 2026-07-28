@@ -82,6 +82,18 @@ for item in tutorials:
     item['publishedOrder'] = item.pop('published_order', item.get('publishedOrder', 0))
     item.pop('_source', None)
 
+
+updates_path = ROOT / 'content' / 'updates' / 'updates.md'
+updates_meta, updates_body = read_markdown(updates_path) if updates_path.exists() else ({}, '')
+featured_x_post = updates_meta.get('featured_x_post') or {}
+if not isinstance(featured_x_post, dict):
+    raise ValueError('`featured_x_post` must be a mapping in content/updates/updates.md')
+featured_x_post = {
+    'title': str(featured_x_post.get('title') or 'Featured update from BriThe3DGuy'),
+    'xPostUrl': str(featured_x_post.get('x_post_url') or '').strip(),
+    'description': str(featured_x_post.get('description') or '').strip(),
+}
+
 downloads = read_grouped_collection(ROOT / 'content' / 'downloads', 'downloads')
 require_fields(downloads, ['id', 'title', 'category', 'provider', 'url'], 'Download')
 validate_unique(downloads, 'id', 'download id')
@@ -96,11 +108,13 @@ for item in downloads:
 (ROOT / 'data' / 'tutorials-data.js').write_text('// Generated from the three subject Markdown files. Do not edit directly.\nwindow.TUTORIAL_DATA = ' + json.dumps(tutorials, indent=2, ensure_ascii=False) + ';\n', encoding='utf-8')
 (ROOT / 'data' / 'downloads.json').write_text(json.dumps(downloads, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 (ROOT / 'data' / 'downloads-data.js').write_text('// Generated from content/downloads/downloads.md. Do not edit directly.\nwindow.DOWNLOAD_DATA = ' + json.dumps(downloads, indent=2, ensure_ascii=False) + ';\n', encoding='utf-8')
+(ROOT / 'data' / 'updates.json').write_text(json.dumps(featured_x_post, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+(ROOT / 'data' / 'updates-data.js').write_text('// Generated from content/updates/updates.md. Do not edit directly.\nwindow.FEATURED_X_POST = ' + json.dumps(featured_x_post, indent=2, ensure_ascii=False) + ';\n', encoding='utf-8')
 
 section_counts = {}
 for item in tutorials:
     section_counts[item['section']] = section_counts.get(item['section'], 0) + 1
-print(f'Built {len(tutorials)} tutorials and {len(downloads)} downloads from Markdown.')
+print(f'Built {len(tutorials)} tutorials, {len(downloads)} downloads, and the featured X post settings from Markdown.')
 for section in ('3D Graphics', 'Animation', 'Game Development'):
     print(f'  {section}: {section_counts.get(section, 0)} tutorials')
 print(f'  Downloads: {len(downloads)} products')

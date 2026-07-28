@@ -401,19 +401,20 @@
 </div>
 </div>
 <div class="x-feed-section">
-<span class="section-label">Recent Posts</span>
+<span class="section-label">Featured Post</span>
 <h3 class="x-feed-title">See what I’m working on now.</h3>
-<div class="x-timeline-shell" id="x-timeline-shell" aria-label="Recent posts from BriThe3DGuy on X">
-<a class="twitter-timeline" data-height="680" data-theme="dark" data-chrome="noheader nofooter transparent" href="https://twitter.com/brithe3dguy">Posts by @BriThe3DGuy</a>
-<noscript><p><a href="https://x.com/brithe3dguy">View @BriThe3DGuy on X</a></p></noscript>
-</div>
-<div class="x-feed-fallback" id="x-feed-fallback" hidden>
+<div class="x-featured-post" id="x-featured-post" aria-live="polite">
+<div class="x-featured-placeholder">
 <span class="x-feed-fallback-mark">X</span>
-<div><h4>X could not load the live feed.</h4><p>Some browsers, privacy tools, and networks block X's embedded timeline. You can still see every update directly on the profile.</p></div>
-<a class="btn-secondary" href="https://x.com/brithe3dguy" target="_blank" rel="noopener noreferrer">View posts on X →</a>
+<div>
+<h4>Choose a post to feature.</h4>
+<p>Add a specific X post URL to <code>content/updates/updates.md</code>, then run <code>update-content-data.bat</code>.</p>
 </div>
-<p class="x-embed-note" id="x-embed-note">The live feed is provided by X and may be blocked by browser tracking protection or network filters.</p>
+<a class="btn-secondary" href="https://x.com/brithe3dguy" target="_blank" rel="noopener noreferrer">View @BriThe3DGuy on X →</a>
 </div>
+</div>
+<p class="x-embed-note" id="x-embed-note">A direct link remains available if X or browser privacy settings block the embedded post.</p>
+</div></div>
 </div>
 </section>
 <!-- FOOTER -->
@@ -429,37 +430,54 @@
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="js/xp.js"></script>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="data/updates-data.js"></script>
 <script>
 (function () {
-  const shell = document.getElementById('x-timeline-shell');
-  const fallback = document.getElementById('x-feed-fallback');
+  const host = document.getElementById('x-featured-post');
   const note = document.getElementById('x-embed-note');
-  if (!shell || !fallback) return;
+  const data = window.FEATURED_X_POST || {};
+  const url = String(data.xPostUrl || '').trim();
+  if (!host || !url) return;
 
-  let resolved = false;
-  const showFeed = () => {
-    if (resolved) return;
-    resolved = true;
-    shell.classList.add('is-loaded');
+  const statusMatch = url.match(/(?:twitter|x)\.com\/[^/]+\/status\/(\d+)/i);
+  if (!statusMatch) {
+    host.innerHTML = '<div class="x-featured-placeholder"><span class="x-feed-fallback-mark">X</span><div><h4>That X post link is not valid.</h4><p>Use the full URL from a public post, including <code>/status/</code> and the post number.</p></div><a class="btn-secondary" href="' + url.replace(/"/g, '&quot;') + '" target="_blank" rel="noopener noreferrer">Open the link →</a></div>';
+    return;
+  }
+
+  host.innerHTML = '<div class="x-single-post-shell" id="x-single-post-shell"><blockquote class="twitter-tweet" data-theme="dark" data-dnt="true"><a href="' + url.replace(/"/g, '&quot;') + '">View the featured post on X</a></blockquote></div><div class="x-single-post-fallback" id="x-single-post-fallback" hidden><span class="x-feed-fallback-mark">X</span><div><h4>' + (data.title || 'Featured update') + '</h4><p>' + (data.description || 'See the latest update directly on X.') + '</p></div><a class="btn-secondary" href="' + url.replace(/"/g, '&quot;') + '" target="_blank" rel="noopener noreferrer">View this post on X →</a></div>';
+
+  const fallback = document.getElementById('x-single-post-fallback');
+  const shell = document.getElementById('x-single-post-shell');
+  const showFallback = function () {
+    if (shell && !shell.querySelector('iframe')) {
+      shell.hidden = true;
+      fallback.hidden = false;
+      if (note) note.textContent = 'The featured post could not be embedded, but the direct link still works.';
+    }
   };
-  const showFallback = () => {
-    if (resolved) return;
-    resolved = true;
-    shell.hidden = true;
-    fallback.hidden = false;
-    if (note) note.hidden = true;
+
+  const loadWidgets = function () {
+    if (window.twttr && window.twttr.widgets) {
+      window.twttr.widgets.load(host).then(function () {
+        window.setTimeout(showFallback, 500);
+      }).catch(showFallback);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.async = true;
+    script.charset = 'utf-8';
+    script.onload = function () {
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load(host).then(function () { window.setTimeout(showFallback, 500); }).catch(showFallback);
+      } else { showFallback(); }
+    };
+    script.onerror = showFallback;
+    document.head.appendChild(script);
   };
-  const detect = () => {
-    if (shell.querySelector('iframe')) showFeed();
-  };
-  const observer = new MutationObserver(detect);
-  observer.observe(shell, { childList: true, subtree: true });
-  detect();
-  window.setTimeout(() => {
-    observer.disconnect();
-    if (!shell.querySelector('iframe')) showFallback();
-  }, 8000);
+  loadWidgets();
+  window.setTimeout(showFallback, 8000);
 })();
 </script>
 <script src="data/tutorials-data.js"></script><script src="js/main.js"></script>

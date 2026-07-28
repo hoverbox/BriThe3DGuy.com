@@ -81,3 +81,16 @@ The JavaScript files allow the site to work when opened directly from a Windows 
 ## Animation visibility
 
 The Animation content file remains available at `content/tutorials/animation.md`, but the Animation hub is currently hidden from the main navigation and sitemap until real tutorials are added. The homepage displays Animation as a non-clickable Coming Soon card.
+
+## Featured X post
+
+Edit `content/updates/updates.md` and paste the full URL of the public X post into `x_post_url`.
+
+```yaml
+featured_x_post:
+  title: Logic Bricks update
+  x_post_url: https://x.com/brithe3dguy/status/POST_NUMBER
+  description: A short fallback description shown when X embeds are blocked.
+```
+
+Run `update-content-data.bat`. The homepage will embed that single post. If X cannot load it, visitors see the title, description, and a direct link instead of an empty panel.
