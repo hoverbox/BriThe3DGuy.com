@@ -1,19 +1,19 @@
-// Generated from content/downloads/downloads.md. Do not edit directly.
+// Generated from the grouped downloads Markdown file. Do not edit directly.
 window.DOWNLOAD_DATA = [
   {
-    "id": "godot-asset-browser",
-    "title": "Godot Asset Browser",
-    "category": "Godot Addons",
-    "provider": "GitHub",
-    "url": "https://github.com/hoverbox/Godot-Asset-Browser",
-    "image": "images/browser_thumb.png",
+    "id": "pocket-guide-3d-graphics",
+    "title": "The Pocket Guide to 3D Graphics",
+    "category": "Guides",
+    "provider": "Gumroad",
+    "url": "https://brithe3dguy.gumroad.com/l/ucueq",
+    "image": "images/graphics_thumb.png",
     "tags": [
-      "Godot",
-      "Asset Management"
+      "3D Graphics",
+      "Reference Guide"
     ],
-    "description": "A drag-and-drop asset browser addon for Godot that helps organize reusable assets and speed up level building.",
-    "categorySlug": "godot-addons",
-    "publishedOrder": 97
+    "description": "A reference guide for 3D modeling tools.",
+    "categorySlug": "guides",
+    "publishedOrder": 100
   },
   {
     "id": "godot-bridge",
@@ -46,18 +46,18 @@ window.DOWNLOAD_DATA = [
     "publishedOrder": 98
   },
   {
-    "id": "pocket-guide-3d-graphics",
-    "title": "The Pocket Guide to 3D Graphics",
-    "category": "Guides",
-    "provider": "Gumroad",
-    "url": "https://brithe3dguy.gumroad.com/l/ucueq",
-    "image": "images/graphics_thumb.png",
+    "id": "godot-asset-browser",
+    "title": "Godot Asset Browser",
+    "category": "Godot Addons",
+    "provider": "GitHub",
+    "url": "https://github.com/hoverbox/Godot-Asset-Browser",
+    "image": "images/browser_thumb.png",
     "tags": [
-      "3D Graphics",
-      "Reference Guide"
+      "Godot",
+      "Asset Management"
     ],
-    "description": "A reference guide for 3D modeling tools.",
-    "categorySlug": "guides",
-    "publishedOrder": 100
+    "description": "A drag-and-drop asset browser addon for Godot that helps organize reusable assets and speed up level building.",
+    "categorySlug": "godot-addons",
+    "publishedOrder": 97
   }
 ];

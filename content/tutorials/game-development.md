@@ -1,19 +1,5 @@
 ---
-section: Game Development
 tutorials:
-- id: logic-bricks-double-jump
-  title: Double Jump in Godot Without Code
-  section: Game Development
-  topic: Character Controllers
-  difficulty: Beginner
-  youtube: https://www.youtube.com/watch?v=Bg1DqdRhDes
-  duration: ''
-  tags:
-  - Godot
-  - Logic Bricks
-  - Character Controller
-  published_order: 201
-  description: Add a configurable double jump to a Godot player using visual scripting.
 - id: logic-bricks-getting-started
   title: Getting Started With Visual Scripting in Godot
   section: Game Development
@@ -40,8 +26,21 @@ tutorials:
   - Character Controller
   published_order: 202
   description: Create player movement in Godot using Logic Bricks instead of handwritten code.
+- id: logic-bricks-double-jump
+  title: Double Jump in Godot Without Code
+  section: Game Development
+  topic: Character Controllers
+  difficulty: Beginner
+  youtube: https://www.youtube.com/watch?v=Bg1DqdRhDes
+  duration: ''
+  tags:
+  - Godot
+  - Logic Bricks
+  - Character Controller
+  published_order: 201
+  description: Add a configurable double jump to a Godot player using visual scripting.
 ---
 
 # Game Development Tutorials
 
-Add, remove, or edit entries in the `tutorials` list above. Topic filter buttons are created automatically from each entry's `topic`.
+Add each new Godot or Logic Bricks tutorial as another item under `tutorials:`. New topics appear automatically.

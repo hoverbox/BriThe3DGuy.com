@@ -1,5 +1,9 @@
 # Tutorial Data
 
-Tutorials are maintained in the three subject Markdown files documented in `CONTENT_SYSTEM_README.md`.
+Tutorials are maintained in three grouped Markdown files:
 
-Commit your Markdown edits to the `main` branch on GitHub. GitHub Actions rebuilds and publishes the site automatically. Do not edit files in `data/` directly.
+- `content/tutorials/3d-graphics.md`
+- `content/tutorials/animation.md`
+- `content/tutorials/game-development.md`
+
+Add a new entry to the appropriate `tutorials:` list and commit it on GitHub. Topic filters, counts, homepage cards, and XP thresholds are generated automatically.

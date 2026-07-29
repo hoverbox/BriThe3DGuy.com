@@ -1,4 +1,4 @@
-// Generated from content/updates/updates.md. Do not edit directly.
+// Generated from the grouped X updates Markdown file. Do not edit directly.
 window.FEATURED_X_POST = {
   "title": "Featured update from BriThe3DGuy",
   "xPostUrl": "",

@@ -1,51 +1,54 @@
 [
   {
-    "id": "array-modifier",
-    "title": "Array Modifier",
-    "section": "3D Graphics",
-    "topic": "Modifiers",
+    "id": "logic-bricks-getting-started",
+    "title": "Getting Started With Visual Scripting in Godot",
+    "section": "Game Development",
+    "topic": "Getting Started",
     "difficulty": "Beginner",
-    "duration": "0:56",
+    "duration": "",
     "tags": [
-      "Blender",
-      "Modifiers"
+      "Godot",
+      "Logic Bricks",
+      "Beginner"
     ],
-    "description": "Learn how the Array Modifier works to duplicate and arrange geometry in Blender.",
-    "youtubeId": "RokaDLSQT0M",
-    "topicSlug": "modifiers",
-    "publishedOrder": 85
+    "description": "Get started with visual scripting in Godot using Logic Bricks.",
+    "youtubeId": "ZZNNsa-plMU",
+    "topicSlug": "getting-started",
+    "publishedOrder": 203
   },
   {
-    "id": "bevel-modifier",
-    "title": "Bevel Up Your Game With the Bevel Modifier",
-    "section": "3D Graphics",
-    "topic": "Modifiers",
+    "id": "logic-bricks-player-movement",
+    "title": "Player Movement With Visual Scripting",
+    "section": "Game Development",
+    "topic": "Character Controllers",
     "difficulty": "Beginner",
-    "duration": "1:11",
+    "duration": "",
     "tags": [
-      "Blender",
-      "Modifiers"
+      "Godot",
+      "Logic Bricks",
+      "Character Controller"
     ],
-    "description": "Create smooth, clean edges and improve your 3D models with the Bevel Modifier.",
-    "youtubeId": "WPHjfOoZnXg",
-    "topicSlug": "modifiers",
-    "publishedOrder": 88
+    "description": "Create player movement in Godot using Logic Bricks instead of handwritten code.",
+    "youtubeId": "s7RAk5GYo-U",
+    "topicSlug": "character-controllers",
+    "publishedOrder": 202
   },
   {
-    "id": "bevel-tool",
-    "title": "Bevel Like a Boss: Add Style to Your 3D Models!",
-    "section": "3D Graphics",
-    "topic": "Modeling Tools",
+    "id": "logic-bricks-double-jump",
+    "title": "Double Jump in Godot Without Code",
+    "section": "Game Development",
+    "topic": "Character Controllers",
     "difficulty": "Beginner",
-    "duration": "1:23",
+    "duration": "",
     "tags": [
-      "Blender",
-      "Tools"
+      "Godot",
+      "Logic Bricks",
+      "Character Controller"
     ],
-    "description": "Learn the ins and outs of the Bevel tool in Blender.",
-    "youtubeId": "yCD80QSTWmg",
-    "topicSlug": "modeling-tools",
-    "publishedOrder": 93
+    "description": "Add a configurable double jump to a Godot player using visual scripting.",
+    "youtubeId": "Bg1DqdRhDes",
+    "topicSlug": "character-controllers",
+    "publishedOrder": 201
   },
   {
     "id": "blender-ui",
@@ -64,36 +67,20 @@
     "publishedOrder": 100
   },
   {
-    "id": "boolean-modifier",
-    "title": "Bool-etproof Modeling Techniques! Boolean Modifier",
+    "id": "object-mode-grs",
+    "title": "Object Mode: Grab, Rotate, and Scale in Blender",
     "section": "3D Graphics",
-    "topic": "Modifiers",
+    "topic": "Blender Basics",
     "difficulty": "Beginner",
-    "duration": "2:11",
+    "duration": "2:00",
     "tags": [
       "Blender",
-      "Modifiers"
+      "Beginner"
     ],
-    "description": "Cut, combine, and intersect objects to create complex shapes with the Boolean Modifier.",
-    "youtubeId": "X2EuW1AgzTw",
-    "topicSlug": "modifiers",
-    "publishedOrder": 86
-  },
-  {
-    "id": "curve-modifier",
-    "title": "Curve Modifier",
-    "section": "3D Graphics",
-    "topic": "Modifiers",
-    "difficulty": "Beginner",
-    "duration": "0:57",
-    "tags": [
-      "Blender",
-      "Modifiers"
-    ],
-    "description": "Learn to bend your objects with the Curve Modifier in Blender.",
-    "youtubeId": "zLAChQHot5Y",
-    "topicSlug": "modifiers",
-    "publishedOrder": 81
+    "description": "Learn the ins and outs of manipulating an object in object mode.",
+    "youtubeId": "UrFgT7LMp9I",
+    "topicSlug": "blender-basics",
+    "publishedOrder": 99
   },
   {
     "id": "edit-mode-grs",
@@ -112,102 +99,6 @@
     "publishedOrder": 98
   },
   {
-    "id": "extrude-tool",
-    "title": "Push, Pull, Create: Unlock Blender's Extrude Tool Power!",
-    "section": "3D Graphics",
-    "topic": "Modeling Tools",
-    "difficulty": "Beginner",
-    "duration": "1:11",
-    "tags": [
-      "Blender",
-      "Tools"
-    ],
-    "description": "Master the Extrude tool in Blender and start building 3D shapes with confidence.",
-    "youtubeId": "z-l0xmczPhc",
-    "topicSlug": "modeling-tools",
-    "publishedOrder": 92
-  },
-  {
-    "id": "fill-tools",
-    "title": "Bridge the Gaps: Master Blender's Fill Tools Fast!",
-    "section": "3D Graphics",
-    "topic": "Modeling Tools",
-    "difficulty": "Beginner",
-    "duration": "1:18",
-    "tags": [
-      "Blender",
-      "Tools"
-    ],
-    "description": "Learn about Blender's different Fill tool options including Bridge Loops.",
-    "youtubeId": "zb6I3HiQ3Sk",
-    "topicSlug": "modeling-tools",
-    "publishedOrder": 90
-  },
-  {
-    "id": "geometry-selection",
-    "title": "How to Select Geometry Like a Pro",
-    "section": "3D Graphics",
-    "topic": "Modeling Tools",
-    "difficulty": "Beginner",
-    "duration": "0:59",
-    "tags": [
-      "Blender",
-      "Tools"
-    ],
-    "description": "Master Shift Select, Loop Select, Linked Select, and Shortest Path Selection.",
-    "youtubeId": "-lKuSonXKqo",
-    "topicSlug": "modeling-tools",
-    "publishedOrder": 94
-  },
-  {
-    "id": "grease-pencil",
-    "title": "Blender Grease Pencil Beginner Tutorial – Learn in 6 Minutes!",
-    "section": "3D Graphics",
-    "topic": "Blender Basics",
-    "difficulty": "Beginner",
-    "duration": "6:03",
-    "tags": [
-      "Blender",
-      "Beginner"
-    ],
-    "description": "Everything you need to get started with Grease Pencil — drawing, layers, strokes, and key tools.",
-    "youtubeId": "inckC5b7zRk",
-    "topicSlug": "blender-basics",
-    "publishedOrder": 77
-  },
-  {
-    "id": "image-textures",
-    "title": "Image Textures",
-    "section": "3D Graphics",
-    "topic": "Materials & Texturing",
-    "difficulty": "Beginner",
-    "duration": "2:46",
-    "tags": [
-      "Blender",
-      "Materials"
-    ],
-    "description": "Learn how to set up basic materials with image textures in Blender.",
-    "youtubeId": "dExoV7ZD5R8",
-    "topicSlug": "materials-and-texturing",
-    "publishedOrder": 79
-  },
-  {
-    "id": "inset-tool",
-    "title": "Find the Inset-ive! Blender's Inset Tool",
-    "section": "3D Graphics",
-    "topic": "Modeling Tools",
-    "difficulty": "Beginner",
-    "duration": "0:40",
-    "tags": [
-      "Blender",
-      "Tools"
-    ],
-    "description": "Learn about the different options inside the Inset tool.",
-    "youtubeId": "v_PK6CV_ktQ",
-    "topicSlug": "modeling-tools",
-    "publishedOrder": 91
-  },
-  {
     "id": "knife-tool",
     "title": "Carve Your Way to Better Models with Blender's Knife Tool!",
     "section": "3D Graphics",
@@ -222,22 +113,6 @@
     "youtubeId": "v3dJ2UvV8sI",
     "topicSlug": "modeling-tools",
     "publishedOrder": 97
-  },
-  {
-    "id": "lattice-modifier",
-    "title": "Lattice Modifier",
-    "section": "3D Graphics",
-    "topic": "Modifiers",
-    "difficulty": "Beginner",
-    "duration": "1:33",
-    "tags": [
-      "Blender",
-      "Modifiers"
-    ],
-    "description": "Learn how to use the Lattice Modifier in Blender to deform objects non-destructively.",
-    "youtubeId": "9Jv6sCBDZR4",
-    "topicSlug": "modifiers",
-    "publishedOrder": 82
   },
   {
     "id": "loop-cuts",
@@ -272,84 +147,84 @@
     "publishedOrder": 95
   },
   {
-    "id": "object-mode-grs",
-    "title": "Object Mode: Grab, Rotate, and Scale in Blender",
+    "id": "geometry-selection",
+    "title": "How to Select Geometry Like a Pro",
     "section": "3D Graphics",
-    "topic": "Blender Basics",
+    "topic": "Modeling Tools",
     "difficulty": "Beginner",
-    "duration": "2:00",
+    "duration": "0:59",
     "tags": [
       "Blender",
-      "Beginner"
+      "Tools"
     ],
-    "description": "Learn the ins and outs of manipulating an object in object mode.",
-    "youtubeId": "UrFgT7LMp9I",
-    "topicSlug": "blender-basics",
-    "publishedOrder": 99
+    "description": "Master Shift Select, Loop Select, Linked Select, and Shortest Path Selection.",
+    "youtubeId": "-lKuSonXKqo",
+    "topicSlug": "modeling-tools",
+    "publishedOrder": 94
   },
   {
-    "id": "principled-bsdf",
-    "title": "Guide to the Principled BSDF",
+    "id": "bevel-tool",
+    "title": "Bevel Like a Boss: Add Style to Your 3D Models!",
     "section": "3D Graphics",
-    "topic": "Materials & Texturing",
+    "topic": "Modeling Tools",
     "difficulty": "Beginner",
-    "duration": "5:56",
+    "duration": "1:23",
     "tags": [
       "Blender",
-      "Materials"
+      "Tools"
     ],
-    "description": "Get the basics of the Principled BSDF shader — make everything from rubber to glass.",
-    "youtubeId": "jGw283Fc4aE",
-    "topicSlug": "materials-and-texturing",
-    "publishedOrder": 80
+    "description": "Learn the ins and outs of the Bevel tool in Blender.",
+    "youtubeId": "yCD80QSTWmg",
+    "topicSlug": "modeling-tools",
+    "publishedOrder": 93
   },
   {
-    "id": "screw-modifier",
-    "title": "Screw Modifier",
+    "id": "extrude-tool",
+    "title": "Push, Pull, Create: Unlock Blender's Extrude Tool Power!",
     "section": "3D Graphics",
-    "topic": "Modifiers",
+    "topic": "Modeling Tools",
     "difficulty": "Beginner",
-    "duration": "1:27",
+    "duration": "1:11",
     "tags": [
       "Blender",
-      "Modifiers"
+      "Tools"
     ],
-    "description": "Learn how to use the Screw Modifier in Blender to spin profiles into 3D forms.",
-    "youtubeId": "JFzWbjJ8IIY",
-    "topicSlug": "modifiers",
-    "publishedOrder": 83
+    "description": "Master the Extrude tool in Blender and start building 3D shapes with confidence.",
+    "youtubeId": "z-l0xmczPhc",
+    "topicSlug": "modeling-tools",
+    "publishedOrder": 92
   },
   {
-    "id": "skin-modifier",
-    "title": "Skin Modifier",
+    "id": "inset-tool",
+    "title": "Find the Inset-ive! Blender's Inset Tool",
     "section": "3D Graphics",
-    "topic": "Modifiers",
+    "topic": "Modeling Tools",
     "difficulty": "Beginner",
-    "duration": "0:56",
+    "duration": "0:40",
     "tags": [
       "Blender",
-      "Modifiers"
+      "Tools"
     ],
-    "description": "Learn how to use Blender's Skin Modifier to generate mesh from edges and vertices.",
-    "youtubeId": "qZj_TGe4nLo",
-    "topicSlug": "modifiers",
-    "publishedOrder": 84
+    "description": "Learn about the different options inside the Inset tool.",
+    "youtubeId": "v_PK6CV_ktQ",
+    "topicSlug": "modeling-tools",
+    "publishedOrder": 91
   },
   {
-    "id": "solidify-modifier",
-    "title": "Stay Solid: Give Your Models Some Depth!",
+    "id": "fill-tools",
+    "title": "Bridge the Gaps: Master Blender's Fill Tools Fast!",
     "section": "3D Graphics",
-    "topic": "Modifiers",
+    "topic": "Modeling Tools",
     "difficulty": "Beginner",
-    "duration": "1:34",
+    "duration": "1:18",
     "tags": [
       "Blender",
-      "Modifiers"
+      "Tools"
     ],
-    "description": "Use Blender's Solidify Modifier to add thickness to your 3D models.",
-    "youtubeId": "YLOrS1kgCpc",
-    "topicSlug": "modifiers",
-    "publishedOrder": 87
+    "description": "Learn about Blender's different Fill tool options including Bridge Loops.",
+    "youtubeId": "zb6I3HiQ3Sk",
+    "topicSlug": "modeling-tools",
+    "publishedOrder": 90
   },
   {
     "id": "subdivision-surface",
@@ -368,6 +243,166 @@
     "publishedOrder": 89
   },
   {
+    "id": "bevel-modifier",
+    "title": "Bevel Up Your Game With the Bevel Modifier",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "1:11",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Create smooth, clean edges and improve your 3D models with the Bevel Modifier.",
+    "youtubeId": "WPHjfOoZnXg",
+    "topicSlug": "modifiers",
+    "publishedOrder": 88
+  },
+  {
+    "id": "solidify-modifier",
+    "title": "Stay Solid: Give Your Models Some Depth!",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "1:34",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Use Blender's Solidify Modifier to add thickness to your 3D models.",
+    "youtubeId": "YLOrS1kgCpc",
+    "topicSlug": "modifiers",
+    "publishedOrder": 87
+  },
+  {
+    "id": "boolean-modifier",
+    "title": "Bool-etproof Modeling Techniques! Boolean Modifier",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "2:11",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Cut, combine, and intersect objects to create complex shapes with the Boolean Modifier.",
+    "youtubeId": "X2EuW1AgzTw",
+    "topicSlug": "modifiers",
+    "publishedOrder": 86
+  },
+  {
+    "id": "array-modifier",
+    "title": "Array Modifier",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "0:56",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Learn how the Array Modifier works to duplicate and arrange geometry in Blender.",
+    "youtubeId": "RokaDLSQT0M",
+    "topicSlug": "modifiers",
+    "publishedOrder": 85
+  },
+  {
+    "id": "skin-modifier",
+    "title": "Skin Modifier",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "0:56",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Learn how to use Blender's Skin Modifier to generate mesh from edges and vertices.",
+    "youtubeId": "qZj_TGe4nLo",
+    "topicSlug": "modifiers",
+    "publishedOrder": 84
+  },
+  {
+    "id": "screw-modifier",
+    "title": "Screw Modifier",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "1:27",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Learn how to use the Screw Modifier in Blender to spin profiles into 3D forms.",
+    "youtubeId": "JFzWbjJ8IIY",
+    "topicSlug": "modifiers",
+    "publishedOrder": 83
+  },
+  {
+    "id": "lattice-modifier",
+    "title": "Lattice Modifier",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "1:33",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Learn how to use the Lattice Modifier in Blender to deform objects non-destructively.",
+    "youtubeId": "9Jv6sCBDZR4",
+    "topicSlug": "modifiers",
+    "publishedOrder": 82
+  },
+  {
+    "id": "curve-modifier",
+    "title": "Curve Modifier",
+    "section": "3D Graphics",
+    "topic": "Modifiers",
+    "difficulty": "Beginner",
+    "duration": "0:57",
+    "tags": [
+      "Blender",
+      "Modifiers"
+    ],
+    "description": "Learn to bend your objects with the Curve Modifier in Blender.",
+    "youtubeId": "zLAChQHot5Y",
+    "topicSlug": "modifiers",
+    "publishedOrder": 81
+  },
+  {
+    "id": "principled-bsdf",
+    "title": "Guide to the Principled BSDF",
+    "section": "3D Graphics",
+    "topic": "Materials & Texturing",
+    "difficulty": "Beginner",
+    "duration": "5:56",
+    "tags": [
+      "Blender",
+      "Materials"
+    ],
+    "description": "Get the basics of the Principled BSDF shader — make everything from rubber to glass.",
+    "youtubeId": "jGw283Fc4aE",
+    "topicSlug": "materials-and-texturing",
+    "publishedOrder": 80
+  },
+  {
+    "id": "image-textures",
+    "title": "Image Textures",
+    "section": "3D Graphics",
+    "topic": "Materials & Texturing",
+    "difficulty": "Beginner",
+    "duration": "2:46",
+    "tags": [
+      "Blender",
+      "Materials"
+    ],
+    "description": "Learn how to set up basic materials with image textures in Blender.",
+    "youtubeId": "dExoV7ZD5R8",
+    "topicSlug": "materials-and-texturing",
+    "publishedOrder": 79
+  },
+  {
     "id": "uv-unwrap",
     "title": "Learn to UV Unwrap in Blender",
     "section": "3D Graphics",
@@ -384,54 +419,19 @@
     "publishedOrder": 78
   },
   {
-    "id": "logic-bricks-double-jump",
-    "title": "Double Jump in Godot Without Code",
-    "section": "Game Development",
-    "topic": "Character Controllers",
+    "id": "grease-pencil",
+    "title": "Blender Grease Pencil Beginner Tutorial – Learn in 6 Minutes!",
+    "section": "3D Graphics",
+    "topic": "Blender Basics",
     "difficulty": "Beginner",
-    "duration": "",
+    "duration": "6:03",
     "tags": [
-      "Godot",
-      "Logic Bricks",
-      "Character Controller"
-    ],
-    "description": "Add a configurable double jump to a Godot player using visual scripting.",
-    "youtubeId": "Bg1DqdRhDes",
-    "topicSlug": "character-controllers",
-    "publishedOrder": 201
-  },
-  {
-    "id": "logic-bricks-getting-started",
-    "title": "Getting Started With Visual Scripting in Godot",
-    "section": "Game Development",
-    "topic": "Getting Started",
-    "difficulty": "Beginner",
-    "duration": "",
-    "tags": [
-      "Godot",
-      "Logic Bricks",
+      "Blender",
       "Beginner"
     ],
-    "description": "Get started with visual scripting in Godot using Logic Bricks.",
-    "youtubeId": "ZZNNsa-plMU",
-    "topicSlug": "getting-started",
-    "publishedOrder": 203
-  },
-  {
-    "id": "logic-bricks-player-movement",
-    "title": "Player Movement With Visual Scripting",
-    "section": "Game Development",
-    "topic": "Character Controllers",
-    "difficulty": "Beginner",
-    "duration": "",
-    "tags": [
-      "Godot",
-      "Logic Bricks",
-      "Character Controller"
-    ],
-    "description": "Create player movement in Godot using Logic Bricks instead of handwritten code.",
-    "youtubeId": "s7RAk5GYo-U",
-    "topicSlug": "character-controllers",
-    "publishedOrder": 202
+    "description": "Everything you need to get started with Grease Pencil — drawing, layers, strokes, and key tools.",
+    "youtubeId": "inckC5b7zRk",
+    "topicSlug": "blender-basics",
+    "publishedOrder": 77
   }
 ]

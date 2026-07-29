@@ -1,8 +1,7 @@
 ---
-section: Animation
 tutorials: []
 ---
 
 # Animation Tutorials
 
-Add, remove, or edit entries in the `tutorials` list above. Topic filter buttons are created automatically from each entry's `topic`.
+This section can remain empty until animation tutorials are ready. Add entries under `tutorials:` when needed.
