@@ -55,28 +55,20 @@ Add a Ko-fi product to its YAML `downloads` list:
 
 The first download using a new `category` automatically creates that category filter and count.
 
-## Update the website data
+## Publish from GitHub
 
-Double-click:
+You do not need to run anything locally. Edit one of the Markdown files directly on GitHub and commit the change to the `main` branch. The workflow in `.github/workflows/build-and-deploy.yml` automatically:
 
-```text
-update-content-data.bat
-```
+1. validates the Markdown content,
+2. generates the browser data files,
+3. recalculates tutorial topics, download categories, and XP totals, and
+4. deploys the updated site to GitHub Pages.
 
-Or run:
+The generated files in `data/` remain in the repository for local previews, but the published versions are rebuilt from Markdown on every deployment. Do not edit them directly.
 
-```bash
-python tools/build_content.py
-```
+### One-time GitHub Pages setting
 
-The builder validates required fields and rejects duplicate tutorial IDs, YouTube URLs, download IDs, and product URLs. It then generates:
-
-- `data/tutorials.json`
-- `data/tutorials-data.js`
-- `data/downloads.json`
-- `data/downloads-data.js`
-
-The JavaScript files allow the site to work when opened directly from a Windows folder. The JSON files are used when the site is hosted online.
+In the repository, open **Settings → Pages** and set **Source** to **GitHub Actions**. After that one-time setting, every commit to `main` publishes automatically.
 
 ## Animation visibility
 
@@ -93,4 +85,4 @@ featured_x_post:
   description: A short fallback description shown when X embeds are blocked.
 ```
 
-Run `update-content-data.bat`. The homepage will embed that single post. If X cannot load it, visitors see the title, description, and a direct link instead of an empty panel.
+Commit the Markdown change on GitHub. The automatic workflow will rebuild the site and the homepage will embed that single post. If X cannot load it, visitors see the title, description, and a direct link instead of an empty panel.
