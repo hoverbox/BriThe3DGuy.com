@@ -1,7 +1,7 @@
 ---
 featured_x_post:
   title: Featured update from BriThe3DGuy
-  x_post_url: ""
+  x_post_url: "https://x.com/BriThe3DGuy/status/2080786590662897715"
   description: Follow @BriThe3DGuy on X for the latest tutorials, Logic Bricks releases, downloads, and project updates.
 ---
 
