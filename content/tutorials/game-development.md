@@ -6,7 +6,7 @@ tutorials:
   topic: Getting Started
   difficulty: Beginner
   youtube: https://www.youtube.com/watch?v=ZZNNsa-plMU
-  duration: ''
+  duration: '1:45'
   tags:
   - Godot
   - Logic Bricks
@@ -19,7 +19,7 @@ tutorials:
   topic: Character Controllers
   difficulty: Beginner
   youtube: https://www.youtube.com/watch?v=s7RAk5GYo-U
-  duration: ''
+  duration: '1:53'
   tags:
   - Godot
   - Logic Bricks
@@ -32,7 +32,7 @@ tutorials:
   topic: Character Controllers
   difficulty: Beginner
   youtube: https://www.youtube.com/watch?v=Bg1DqdRhDes
-  duration: ''
+  duration: '1:12'
   tags:
   - Godot
   - Logic Bricks
