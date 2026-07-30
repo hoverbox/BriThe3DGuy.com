@@ -11,17 +11,6 @@ downloads:
   - Reference Guide
   published_order: 100
   description: A reference guide for 3D modeling tools.
-- id: godot-bridge
-  title: Godot Bridge
-  category: Godot Addons
-  provider: Gumroad
-  url: https://brithe3dguy.gumroad.com/l/mqwois
-  image: images/bridges_thumb.png
-  tags:
-  - Godot
-  - Blender
-  published_order: 99
-  description: Easy export from Blender to Godot.
 - id: logic-bricks
   title: Logic Bricks for Godot 4
   category: Godot Addons
