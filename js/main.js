@@ -65,11 +65,9 @@ function buildLatestCarousel() {
     card.dataset.xp = String(tut.xp);
     card.innerHTML = `
       <a class="tut-thumb-link" href="${targetPage}" aria-label="Watch ${tut.title}">
-        <div class="tut-thumb">
-          <img src="https://i.ytimg.com/vi/${tut.id}/maxresdefault.jpg"
-               onerror="this.src='https://i.ytimg.com/vi/${tut.id}/mqdefault.jpg'"
-               alt="${tut.title}" loading="lazy">
-          <div class="play-btn">▶</div>
+        <div class="tut-thumb" data-youtube-id="${tut.id}">
+          <div class="tut-thumb-image" role="img" aria-label="${tut.title}"></div>
+          <div class="play-btn" aria-hidden="true">▶</div>
         </div>
       </a>
       <div class="tut-meta">
@@ -84,6 +82,21 @@ function buildLatestCarousel() {
       </div>
     `;
     track.appendChild(card);
+
+    // Use a CSS background rather than an <img> so failed thumbnail requests
+    // can never expose alt text or metadata inside the image area.
+    const thumbImage = card.querySelector('.tut-thumb-image');
+    const maxres = `https://i.ytimg.com/vi/${tut.id}/maxresdefault.jpg`;
+    const fallback = `https://i.ytimg.com/vi/${tut.id}/mqdefault.jpg`;
+    const probe = new Image();
+    probe.onload = () => {
+      const usable = probe.naturalWidth >= 640;
+      thumbImage.style.backgroundImage = `url("${usable ? maxres : fallback}")`;
+    };
+    probe.onerror = () => {
+      thumbImage.style.backgroundImage = `url("${fallback}")`;
+    };
+    probe.src = maxres;
   });
 
   const getStep = () => {

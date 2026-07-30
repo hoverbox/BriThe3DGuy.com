@@ -40,7 +40,7 @@
   </script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Syne:wght@400;700;800&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
-<link href="css/style.css?v=20260728-firefox-nav-fix" rel="stylesheet"/>
+<link href="css/style.css?v=20260729-home-hero-thumb-fix" rel="stylesheet"/>
 <style>
     /* ── Hero wrapper ───────────────────────────────────────────── */
     .home-hero-wrap {
@@ -109,7 +109,7 @@
       position: relative;
       z-index: 10;
       padding: 5rem 1.5rem 2rem; /* top pad clears the fixed nav */
-      max-width: 960px;
+      max-width: 1180px;
       width: 100%;
     }
 
@@ -122,11 +122,12 @@
     /* Float layout: Brian floats right, text wraps around him */
     .hero-brian {
       float: right;
-      width: clamp(220px, 30vw, 380px);
-      margin: 0 0 0 2rem;
+      width: clamp(240px, 31vw, 390px);
+      margin: -1.5rem 0 0 1.25rem;
       position: relative;
-      /* Nudge Brian up so he bleeds into the title area naturally */
-      margin-top: -1rem;
+      shape-outside: url('images/Brian.png');
+      shape-image-threshold: 0.12;
+      shape-margin: 1rem;
       filter: drop-shadow(0 20px 60px rgba(255,87,34,0.18));
       pointer-events: none;
       user-select: none;
@@ -141,9 +142,9 @@
     .hero-title {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
-      line-height: 0.94;
-      margin-bottom: 1rem;
+      font-size: clamp(3rem, 5.4vw, 5.2rem);
+      line-height: 0.93;
+      margin: 0 0 1rem;
       letter-spacing: -0.02em;
       color: #fff;
       text-align: left;
@@ -151,7 +152,6 @@
 
     .hero-title span {
       color: #FF5722;
-      white-space: nowrap;
     }
 
     .hero-sub {
@@ -532,7 +532,7 @@
   window.setTimeout(showFallback, 8000);
 })();
 </script>
-<script src="data/tutorials-data.js"></script><script src="data/progression-data.js"></script><script src="data/content-stats-data.js"></script><script src="js/xp.js"></script><script src="js/main.js"></script>
+<script src="data/tutorials-data.js"></script><script src="data/progression-data.js"></script><script src="data/content-stats-data.js"></script><script src="js/xp.js"></script><script src="js/main.js?v=20260729-home-hero-thumb-fix"></script>
 <script>
   // ════════════════════════════════════════════════════════════
   //  Tutorial thumbnail scroll background — Three.js (optimised)
