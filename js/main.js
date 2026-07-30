@@ -48,7 +48,8 @@ function buildLatestCarousel() {
       duration: raw.duration || raw.difficulty || 'Tutorial',
       difficulty: (raw.difficulty || 'beginner').toLowerCase(),
       excerpt: raw.description || raw.excerpt || '',
-      section: raw.section
+      section: raw.section,
+      xp: Number(raw.xp || raw.durationSeconds || 0)
     };
     const targetPage = tut.section === 'Game Development'
       ? 'game-development.html'
@@ -61,6 +62,7 @@ function buildLatestCarousel() {
     card.className = 'tut-card latest-carousel-card';
     card.dataset.tutorialId = tut.tutId;
     card.dataset.difficulty = tut.difficulty;
+    card.dataset.xp = String(tut.xp);
     card.innerHTML = `
       <a class="tut-thumb-link" href="${targetPage}" aria-label="Watch ${tut.title}">
         <div class="tut-thumb">
@@ -76,7 +78,7 @@ function buildLatestCarousel() {
         <div class="tut-title">${tut.title}</div>
         <p class="tut-excerpt">${tut.excerpt}</p>
         <div class="tut-footer">
-          <span>🕐 ${tut.duration}</span>
+          <span>🕐 ${tut.duration}${tut.xp ? ` · ⚡ ${tut.xp.toLocaleString()} XP` : ''}</span>
           <a href="${targetPage}" class="watch-link">Watch →</a>
         </div>
         <button class="xp-complete-btn" style="margin-top:0.9rem;width:100%;"></button>
@@ -207,6 +209,17 @@ function buildLatestCarousel() {
   resumeAutoAdvance();
 }
 
+
+function populateContentStats() {
+  const sections = window.BRI_CONTENT_STATS?.sections || {};
+  document.querySelectorAll('[data-home-section-stats]').forEach(host => {
+    const stats = sections[host.dataset.homeSectionStats] || {};
+    const count = Number(stats.tutorialCount || 0);
+    const xp = Number(stats.xp || 0);
+    host.innerHTML = `<span>${count} tutorial${count === 1 ? '' : 's'}</span><span>⚡ ${xp.toLocaleString()} XP available</span>`;
+  });
+}
+
 // --- Mobile nav toggle ---
 const hamburger = document.querySelector('.nav-hamburger');
 const navLinks  = document.querySelector('.nav-links');
@@ -245,5 +258,6 @@ function handleSubscribe(e) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  populateContentStats();
   buildLatestCarousel();
 });

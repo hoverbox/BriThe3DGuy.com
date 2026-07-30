@@ -1,6 +1,6 @@
 # BriThe3DGuy Content System
 
-The site is maintained through five grouped Markdown files. Edit a file on GitHub, add a new list entry, and commit the change. GitHub Actions rebuilds and publishes the site automatically.
+The website is rebuilt automatically by GitHub Actions whenever changes are committed to the `main` branch. You only edit the grouped Markdown files.
 
 ## Tutorial files
 
@@ -8,66 +8,50 @@ The site is maintained through five grouped Markdown files. Edit a file on GitHu
 - `content/tutorials/animation.md`
 - `content/tutorials/game-development.md`
 
-Add a tutorial beneath the existing `tutorials:` list:
+Add another item under `tutorials:` in the appropriate file. The `topic` value does **not** need to exist ahead of time. A new topic name automatically creates a new filter button, tutorial count, available-XP total, and topic statistics.
 
 ```yaml
 - id: unique-short-id
   title: Tutorial title
-  section: 3D Graphics
-  topic: Modeling Tools
+  section: Game Development
+  topic: New Topic Name
   difficulty: Beginner
   youtube: https://www.youtube.com/watch?v=VIDEO_ID
-  duration: '8:15'
-  tags:
-  - Blender
-  - Modeling
-  published_order: 101
-  description: A short description shown on the tutorial card.
-```
-
-Use the matching section name for each file. A new `topic` value automatically creates a new filter button and count. Every tutorial contributes to the automatic XP totals.
-
-## Downloads
-
-Edit `content/downloads/downloads.md` and add another item beneath `downloads:`:
-
-```yaml
-- id: unique-download-id
-  title: Product title
-  category: Project Files
-  provider: Ko-fi
-  url: https://ko-fi.com/s/YOUR_PRODUCT_ID
-  image: images/example.png
+  duration: '8:32'
   tags:
   - Godot
   - Logic Bricks
-  published_order: 101
-  description: A short description shown on the download card.
+  published_order: 204
+  description: A short description of the tutorial.
 ```
 
-A new `category` value automatically creates a new filter and count.
+### Duration and XP
+
+Use `M:SS` or `H:MM:SS` for `duration`.
+
+- `8:32` becomes 512 XP.
+- `1:02:15` becomes 3,735 XP.
+- One second of video equals one XP.
+
+A blank duration is allowed during drafting, but that tutorial awards 0 XP until a duration is added. The GitHub build prints a warning for any blank durations.
+
+## Downloads
+
+Edit `content/downloads/downloads.md`. A new `category` value automatically creates a new category filter.
 
 ## Featured X post
 
-Edit `content/updates/x-updates.md` and add another item beneath `updates:`:
+Edit `content/updates/x-updates.md`. The newest update with `featured: true` and an `x_post_url` becomes the featured post.
 
-```yaml
-- id: unique-update-id
-  title: Logic Bricks update
-  date: '2026-07-29'
-  featured: true
-  x_post_url: https://x.com/brithe3dguy/status/POST_NUMBER
-  description: A short fallback description for the post.
-```
+## Automatic progression
 
-The newest dated entry marked `featured: true` is displayed. Older entries may stay in the file; set their `featured` value to `false` when they should no longer be featured.
+The build generates:
 
-## Publishing
+- Tutorial and download data
+- Topic counts and XP totals
+- Section XP totals for the homepage
+- One-second-per-XP tutorial rewards
+- A gradually increasing RPG rank curve
+- The Profile page statistics
 
-1. Open the appropriate Markdown file on GitHub.
-2. Click the pencil icon.
-3. Add or edit an entry without removing the opening and closing `---` lines.
-4. Click **Commit changes**.
-5. GitHub Actions validates, rebuilds, and deploys the site.
-
-Do not edit files under `data/`; they are generated automatically.
+Ranks never regress for returning learners. The browser remembers the highest rank a learner has earned. When new tutorials expand the XP curve, the learner keeps that rank, although reaching the next rank may require more XP.

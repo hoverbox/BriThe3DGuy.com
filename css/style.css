@@ -1731,3 +1731,49 @@ footer {
   .x-featured-placeholder .btn-secondary,
   .x-single-post-fallback .btn-secondary { grid-column: 1 / -1; text-align: center; }
 }
+
+/* Data-driven XP and consistent uncropped tutorial thumbnails */
+.tut-thumb img,
+.latest-carousel-card .tut-thumb img,
+[data-tutorial-section="Game Development"] .tut-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center;
+  background: #0b0c12;
+}
+.tutorial-library-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  align-items: center;
+  margin: 1rem 0 1.25rem;
+  color: var(--brand-muted);
+  font-size: .95rem;
+}
+.tutorial-library-summary strong { color: var(--brand-text); }
+.filter-btn span { white-space: nowrap; }
+.v2-card-statline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem .8rem;
+  margin: .8rem 0 .25rem;
+  color: var(--brand-primary);
+  font-size: .82rem;
+  font-weight: 700;
+}
+.profile-achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 1rem;
+}
+.profile-achievement {
+  border: 1px solid var(--brand-card-border);
+  background: var(--brand-card);
+  border-radius: 16px;
+  padding: 1.1rem;
+  opacity: .48;
+}
+.profile-achievement.unlocked { opacity: 1; border-color: rgba(255,87,34,.55); }
+.profile-achievement strong { display:block; margin-bottom:.35rem; color:var(--brand-text); }
+.profile-achievement span { font-size:.88rem; color:var(--brand-muted); }

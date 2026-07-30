@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Your Progress — Bri The 3D Guy</title>
+<title>Your Profile — Bri The 3D Guy</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Syne:wght@400;700;800&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
 <link href="css/style.css?v=20260728-firefox-nav-fix" rel="stylesheet"/>
@@ -19,7 +19,7 @@
 
 <li><a href="game-development.html">Game Development</a></li>
 <li><a href="downloads.html">Downloads</a></li>
-<li><a href="progress.html">⚡ Progress</a></li>
+<li><a href="progress.html">⚡ Profile</a></li>
 <li><a class="nav-cta" href="index.html#newsletter">Stay Updated</a></li>
 </ul>
 <button aria-label="Menu" class="nav-hamburger"><span></span><span></span><span></span></button>
@@ -37,7 +37,7 @@
 <div class="progress-stats">
 <div class="progress-stat">
 <div class="progress-stat-num" id="prog-total-xp">0</div>
-<div class="progress-stat-label">Total XP</div>
+<div class="progress-stat-label">Experience Earned</div>
 </div>
 <div class="progress-stat">
 <div class="progress-stat-num" id="prog-completed">0</div>
@@ -45,7 +45,7 @@
 </div>
 <div class="progress-stat">
 <div class="progress-stat-num" id="prog-rank-num">1</div>
-<div class="progress-stat-label">Current Rank</div>
+<div class="progress-stat-label">Current Level</div>
 </div>
 </div>
 </div>
@@ -57,6 +57,26 @@
 <div class="rank-ladder" id="rank-ladder">
 <!-- filled by JS -->
 </div>
+</div>
+</section>
+
+<section class="section-dark" id="profile-overview">
+<div class="container">
+<span class="section-label">Adventure Stats</span>
+<h2 class="section-title" style="margin-bottom:2rem;">Your Learning Profile</h2>
+<div class="progress-stats" style="max-width:none;">
+<div class="progress-stat"><div class="progress-stat-num" id="profile-available-xp">0</div><div class="progress-stat-label">XP Available</div></div>
+<div class="progress-stat"><div class="progress-stat-num" id="profile-completion">0%</div><div class="progress-stat-label">Overall Completion</div></div>
+<div class="progress-stat"><div class="progress-stat-num" id="profile-hours">0m</div><div class="progress-stat-label">Learning Time Completed</div></div>
+<div class="progress-stat"><div class="progress-stat-num" id="profile-topics">0</div><div class="progress-stat-label">Topics Mastered</div></div>
+</div>
+</div>
+</section>
+<section>
+<div class="container">
+<span class="section-label">Milestones</span>
+<h2 class="section-title" style="margin-bottom:2rem;">Achievements</h2>
+<div class="profile-achievements-grid" id="profile-achievements"></div>
 </div>
 </section>
 <!-- COMPLETED TUTORIALS -->
@@ -92,96 +112,89 @@
 </ul>
 <span class="footer-copy">© 2026 Bri The 3D Guy. All rights reserved.</span>
 </footer>
-<script src="js/xp.js"></script>
-<script src="js/main.js"></script>
+
+<script src="data/tutorials-data.js"></script><script src="data/progression-data.js"></script><script src="data/content-stats-data.js"></script><script src="js/xp.js"></script><script src="js/main.js"></script>
 <script>
-  // ---- Tutorial name lookup (mirrors tutorials.html cards) ----
-  // Add an entry here for every tutorial on the site so the
-  // completed list shows a readable name instead of an ID.
-  const TUTORIAL_NAMES = {
-    'godot-beginner-3d':        { name: 'Build Your First 3D Game in Godot', difficulty: 'beginner' },
-    'godot-shader-intro':       { name: 'Write Your First Custom Shader in Godot 4', difficulty: 'intermediate' },
-    'blender-godot-export':     { name: 'Export From Blender to Godot 4', difficulty: 'intermediate' },
-    'blender-rigging-intro':    { name: 'Rigging Your First Character in Blender', difficulty: 'intermediate' },
-    'godot-physics-character':  { name: 'Godot Physics: CharacterBody3D', difficulty: 'intermediate' },
-    'blender-uv-unwrap':        { name: 'UV Unwrapping in Blender', difficulty: 'beginner' },
-    // ADD NEW TUTORIALS HERE as you publish them
-  };
+function formatTime(seconds) {
+  seconds = Math.max(0, Number(seconds || 0));
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  return hours ? `${hours}h ${minutes}m` : `${minutes}m`;
+}
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const data     = loadProgress();
-    const rank     = getRankForXP(data.xp);
-    const progress = getXPProgress(data.xp);
-    const rankIdx  = RANKS.indexOf(rank);
+function renderProfile() {
+  const tutorials = Array.isArray(window.TUTORIAL_DATA) ? window.TUTORIAL_DATA : [];
+  const lookup = new Map(tutorials.map(t => [String(t.id), t]));
+  const data = loadProgress();
+  const rankIdx = getRankIndexForProgress(data);
+  const rank = RANKS[rankIdx];
+  const progress = getXPProgress(data.xp, data);
+  const completedTutorials = data.completed.map(id => lookup.get(String(id))).filter(Boolean);
+  const completedSeconds = completedTutorials.reduce((sum,t)=>sum+Number(t.durationSeconds||0),0);
+  const totalXP = Number(window.BRI_PROGRESSION?.totalAvailableXP || 0);
+  const completion = totalXP ? Math.round((data.xp / totalXP) * 100) : 0;
 
-    // Hero
-    document.getElementById('prog-badge').textContent      = rank.badge;
-    document.getElementById('prog-rank').textContent       = rank.title;
-    document.getElementById('prog-rank').style.color       = rank.color;
-    document.getElementById('prog-xp').textContent         = `${data.xp} XP total`;
-    document.getElementById('prog-bar').style.width        = progress.pct + '%';
-    document.getElementById('prog-bar').style.background   = rank.color;
-    document.getElementById('prog-bar-label').textContent  = progress.label;
-    document.getElementById('prog-total-xp').textContent   = data.xp;
-    document.getElementById('prog-completed').textContent  = data.completed.length;
-    document.getElementById('prog-rank-num').textContent   = rankIdx + 1;
+  const topicGroups = new Map();
+  tutorials.forEach(t => {
+    const key = `${t.section}::${t.topicSlug}`;
+    if (!topicGroups.has(key)) topicGroups.set(key, []);
+    topicGroups.get(key).push(String(t.id));
+  });
+  const completedSet = new Set(data.completed.map(String));
+  const masteredTopics = [...topicGroups.values()].filter(ids => ids.length && ids.every(id => completedSet.has(id))).length;
 
-    // Rank ladder
-    const ladder = document.getElementById('rank-ladder');
-    RANKS.forEach((r, i) => {
-      const unlocked = data.xp >= r.minXP;
-      const current  = i === rankIdx;
-      const row      = document.createElement('div');
-      row.className  = 'rank-row ' + (current ? 'rank-current' : unlocked ? 'rank-unlocked' : 'rank-locked');
-      row.innerHTML  = `
-        <span class="rank-row-badge">${r.badge}</span>
-        <div class="rank-row-info">
-          <div class="rank-row-title" style="color:${current || unlocked ? r.color : 'var(--brand-muted)'}">
-            ${r.title}
-          </div>
-          <div class="rank-row-desc">${r.desc}</div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;">
-          <span class="rank-row-xp">${r.minXP} XP</span>
-          <span class="rank-status-badge ${current ? 'rank-status-current' : unlocked ? 'rank-status-done' : 'rank-status-locked'}">
-            ${current ? 'Current' : unlocked ? '✓ Unlocked' : 'Locked'}
-          </span>
-        </div>
-      `;
-      ladder.appendChild(row);
-    });
+  document.getElementById('prog-badge').textContent = rank.badge;
+  document.getElementById('prog-rank').textContent = `Level ${rank.level} · ${rank.title}`;
+  document.getElementById('prog-rank').style.color = rank.color;
+  document.getElementById('prog-xp').textContent = `${data.xp.toLocaleString()} XP earned`;
+  document.getElementById('prog-bar').style.width = progress.pct + '%';
+  document.getElementById('prog-bar').style.background = rank.color;
+  document.getElementById('prog-bar-label').textContent = progress.label;
+  document.getElementById('prog-total-xp').textContent = data.xp.toLocaleString();
+  document.getElementById('prog-completed').textContent = `${data.completed.length} / ${tutorials.length}`;
+  document.getElementById('prog-rank-num').textContent = rank.level;
+  document.getElementById('profile-available-xp').textContent = totalXP.toLocaleString();
+  document.getElementById('profile-completion').textContent = `${completion}%`;
+  document.getElementById('profile-hours').textContent = formatTime(completedSeconds);
+  document.getElementById('profile-topics').textContent = masteredTopics;
 
-    // Completed tutorials list
-    const list = document.getElementById('completed-list');
-    if (data.completed.length === 0) {
-      list.innerHTML = `
-        <div class="empty-state">
-          <span class="empty-icon">🎮</span>
-          <p>No tutorials completed yet.</p>
-          <p style="margin-top:0.5rem"><a href="tutorials.html" style="color:var(--brand-primary);font-weight:600;">Start one now →</a></p>
-        </div>`;
-    } else {
-      data.completed.forEach(id => {
-        const info   = TUTORIAL_NAMES[id] || { name: id, difficulty: 'beginner' };
-        const xp     = XP_VALUES[info.difficulty] || 50;
-        const item   = document.createElement('div');
-        item.className = 'completed-item';
-        item.innerHTML = `
-          <span class="completed-check">✓</span>
-          <span class="completed-name">${info.name}</span>
-          <span class="completed-xp">+${xp} XP</span>
-        `;
-        list.appendChild(item);
-      });
-    }
+  const ladder = document.getElementById('rank-ladder');
+  ladder.innerHTML = '';
+  RANKS.forEach((r,i) => {
+    const unlocked = i <= data.highestRankIndex;
+    const current = i === rankIdx;
+    const row = document.createElement('div');
+    row.className = 'rank-row ' + (current ? 'rank-current' : unlocked ? 'rank-unlocked' : 'rank-locked');
+    row.innerHTML = `<span class="rank-row-badge">${r.badge}</span><div class="rank-row-info"><div class="rank-row-title" style="color:${current||unlocked?r.color:'var(--brand-muted)'}">Level ${r.level} · ${r.title}</div><div class="rank-row-desc">${r.desc}</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:.3rem"><span class="rank-row-xp">${Number(r.minXP).toLocaleString()} XP</span><span class="rank-status-badge ${current?'rank-status-current':unlocked?'rank-status-done':'rank-status-locked'}">${current?'Current':unlocked?'✓ Unlocked':'Locked'}</span></div>`;
+    ladder.appendChild(row);
   });
 
-  function confirmReset() {
-    if (confirm('Reset all your XP and progress? This cannot be undone.')) {
-      localStorage.removeItem('bri3d_progress');
-      location.reload();
-    }
+  const achievements = [
+    {name:'First Steps', desc:'Complete your first tutorial.', unlocked:data.completed.length>=1},
+    {name:'Apprentice', desc:'Earn 500 XP.', unlocked:data.xp>=500},
+    {name:'Veteran', desc:'Earn 1,500 XP.', unlocked:data.xp>=1500},
+    {name:'Completionist', desc:'Complete every tutorial in one topic.', unlocked:masteredTopics>=1},
+    {name:'Logic Bricks Adept', desc:'Complete every current Logic Bricks tutorial.', unlocked:(()=>{const ids=tutorials.filter(t=>t.section==='Game Development').map(t=>String(t.id));return ids.length>0&&ids.every(id=>completedSet.has(id));})()},
+    {name:'Legendary', desc:'Reach the Legendary rank.', unlocked:rankIdx===RANKS.length-1}
+  ];
+  const achievementHost = document.getElementById('profile-achievements');
+  achievementHost.innerHTML = achievements.map(a=>`<div class="profile-achievement ${a.unlocked?'unlocked':''}"><strong>${a.unlocked?'🏆':'🔒'} ${a.name}</strong><span>${a.desc}</span></div>`).join('');
+
+  const list = document.getElementById('completed-list');
+  if (!completedTutorials.length) {
+    list.innerHTML = `<div class="empty-state"><span class="empty-icon">🎮</span><p>No tutorials completed yet.</p><p style="margin-top:.5rem"><a href="3d-graphics.html" style="color:var(--brand-primary);font-weight:600">Start one now →</a></p></div>`;
+  } else {
+    list.innerHTML = completedTutorials.map(t=>`<div class="completed-item"><span class="completed-check">✓</span><span class="completed-name">${t.title}</span><span class="completed-xp">+${Number(t.xp||0).toLocaleString()} XP</span></div>`).join('');
   }
-  </script>
+}
+
+document.addEventListener('DOMContentLoaded', renderProfile);
+function confirmReset() {
+  if (confirm('Reset all XP, completed tutorials, and earned ranks? This cannot be undone.')) {
+    localStorage.removeItem('bri3d_progress');
+    location.reload();
+  }
+}
+</script>
 </body>
 </html>

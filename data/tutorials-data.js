@@ -13,6 +13,8 @@ window.TUTORIAL_DATA = [
       "Beginner"
     ],
     "description": "Get started with visual scripting in Godot using Logic Bricks.",
+    "durationSeconds": 0,
+    "xp": 0,
     "youtubeId": "ZZNNsa-plMU",
     "topicSlug": "getting-started",
     "publishedOrder": 203
@@ -30,6 +32,8 @@ window.TUTORIAL_DATA = [
       "Character Controller"
     ],
     "description": "Create player movement in Godot using Logic Bricks instead of handwritten code.",
+    "durationSeconds": 0,
+    "xp": 0,
     "youtubeId": "s7RAk5GYo-U",
     "topicSlug": "character-controllers",
     "publishedOrder": 202
@@ -47,6 +51,8 @@ window.TUTORIAL_DATA = [
       "Character Controller"
     ],
     "description": "Add a configurable double jump to a Godot player using visual scripting.",
+    "durationSeconds": 0,
+    "xp": 0,
     "youtubeId": "Bg1DqdRhDes",
     "topicSlug": "character-controllers",
     "publishedOrder": 201
@@ -63,6 +69,8 @@ window.TUTORIAL_DATA = [
       "Beginner"
     ],
     "description": "Get all the details you need about Blender's interface in one short video.",
+    "durationSeconds": 189,
+    "xp": 189,
     "youtubeId": "dduAKv9G8DE",
     "topicSlug": "blender-basics",
     "publishedOrder": 100
@@ -79,6 +87,8 @@ window.TUTORIAL_DATA = [
       "Beginner"
     ],
     "description": "Learn the ins and outs of manipulating an object in object mode.",
+    "durationSeconds": 120,
+    "xp": 120,
     "youtubeId": "UrFgT7LMp9I",
     "topicSlug": "blender-basics",
     "publishedOrder": 99
@@ -95,6 +105,8 @@ window.TUTORIAL_DATA = [
       "Beginner"
     ],
     "description": "Learn everything you need to know about manipulating geometry in Edit Mode.",
+    "durationSeconds": 134,
+    "xp": 134,
     "youtubeId": "7zxj4kGN3NQ",
     "topicSlug": "modeling-tools",
     "publishedOrder": 98
@@ -111,6 +123,8 @@ window.TUTORIAL_DATA = [
       "Tools"
     ],
     "description": "Make precise cuts, refine your models, and add custom details with the Knife Tool.",
+    "durationSeconds": 62,
+    "xp": 62,
     "youtubeId": "v3dJ2UvV8sI",
     "topicSlug": "modeling-tools",
     "publishedOrder": 97
@@ -127,6 +141,8 @@ window.TUTORIAL_DATA = [
       "Tools"
     ],
     "description": "Learn the ins and outs of the loop cut tool for cleaner mesh topology.",
+    "durationSeconds": 82,
+    "xp": 82,
     "youtubeId": "ijt-1CUFouA",
     "topicSlug": "modeling-tools",
     "publishedOrder": 96
@@ -143,6 +159,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Create perfect symmetry and speed up your 3D modeling process.",
+    "durationSeconds": 102,
+    "xp": 102,
     "youtubeId": "DXVfmzvmK4c",
     "topicSlug": "modifiers",
     "publishedOrder": 95
@@ -159,6 +177,8 @@ window.TUTORIAL_DATA = [
       "Tools"
     ],
     "description": "Master Shift Select, Loop Select, Linked Select, and Shortest Path Selection.",
+    "durationSeconds": 59,
+    "xp": 59,
     "youtubeId": "-lKuSonXKqo",
     "topicSlug": "modeling-tools",
     "publishedOrder": 94
@@ -175,6 +195,8 @@ window.TUTORIAL_DATA = [
       "Tools"
     ],
     "description": "Learn the ins and outs of the Bevel tool in Blender.",
+    "durationSeconds": 83,
+    "xp": 83,
     "youtubeId": "yCD80QSTWmg",
     "topicSlug": "modeling-tools",
     "publishedOrder": 93
@@ -191,6 +213,8 @@ window.TUTORIAL_DATA = [
       "Tools"
     ],
     "description": "Master the Extrude tool in Blender and start building 3D shapes with confidence.",
+    "durationSeconds": 71,
+    "xp": 71,
     "youtubeId": "z-l0xmczPhc",
     "topicSlug": "modeling-tools",
     "publishedOrder": 92
@@ -207,6 +231,8 @@ window.TUTORIAL_DATA = [
       "Tools"
     ],
     "description": "Learn about the different options inside the Inset tool.",
+    "durationSeconds": 40,
+    "xp": 40,
     "youtubeId": "v_PK6CV_ktQ",
     "topicSlug": "modeling-tools",
     "publishedOrder": 91
@@ -223,6 +249,8 @@ window.TUTORIAL_DATA = [
       "Tools"
     ],
     "description": "Learn about Blender's different Fill tool options including Bridge Loops.",
+    "durationSeconds": 78,
+    "xp": 78,
     "youtubeId": "zb6I3HiQ3Sk",
     "topicSlug": "modeling-tools",
     "publishedOrder": 90
@@ -239,6 +267,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Smooth your 3D models and add detail using the Subdivision Surface Modifier.",
+    "durationSeconds": 49,
+    "xp": 49,
     "youtubeId": "ux4qXyJpavU",
     "topicSlug": "modifiers",
     "publishedOrder": 89
@@ -255,6 +285,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Create smooth, clean edges and improve your 3D models with the Bevel Modifier.",
+    "durationSeconds": 71,
+    "xp": 71,
     "youtubeId": "WPHjfOoZnXg",
     "topicSlug": "modifiers",
     "publishedOrder": 88
@@ -271,6 +303,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Use Blender's Solidify Modifier to add thickness to your 3D models.",
+    "durationSeconds": 94,
+    "xp": 94,
     "youtubeId": "YLOrS1kgCpc",
     "topicSlug": "modifiers",
     "publishedOrder": 87
@@ -287,6 +321,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Cut, combine, and intersect objects to create complex shapes with the Boolean Modifier.",
+    "durationSeconds": 131,
+    "xp": 131,
     "youtubeId": "X2EuW1AgzTw",
     "topicSlug": "modifiers",
     "publishedOrder": 86
@@ -303,6 +339,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Learn how the Array Modifier works to duplicate and arrange geometry in Blender.",
+    "durationSeconds": 56,
+    "xp": 56,
     "youtubeId": "RokaDLSQT0M",
     "topicSlug": "modifiers",
     "publishedOrder": 85
@@ -319,6 +357,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Learn how to use Blender's Skin Modifier to generate mesh from edges and vertices.",
+    "durationSeconds": 56,
+    "xp": 56,
     "youtubeId": "qZj_TGe4nLo",
     "topicSlug": "modifiers",
     "publishedOrder": 84
@@ -335,6 +375,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Learn how to use the Screw Modifier in Blender to spin profiles into 3D forms.",
+    "durationSeconds": 87,
+    "xp": 87,
     "youtubeId": "JFzWbjJ8IIY",
     "topicSlug": "modifiers",
     "publishedOrder": 83
@@ -351,6 +393,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Learn how to use the Lattice Modifier in Blender to deform objects non-destructively.",
+    "durationSeconds": 93,
+    "xp": 93,
     "youtubeId": "9Jv6sCBDZR4",
     "topicSlug": "modifiers",
     "publishedOrder": 82
@@ -367,6 +411,8 @@ window.TUTORIAL_DATA = [
       "Modifiers"
     ],
     "description": "Learn to bend your objects with the Curve Modifier in Blender.",
+    "durationSeconds": 57,
+    "xp": 57,
     "youtubeId": "zLAChQHot5Y",
     "topicSlug": "modifiers",
     "publishedOrder": 81
@@ -383,6 +429,8 @@ window.TUTORIAL_DATA = [
       "Materials"
     ],
     "description": "Get the basics of the Principled BSDF shader — make everything from rubber to glass.",
+    "durationSeconds": 356,
+    "xp": 356,
     "youtubeId": "jGw283Fc4aE",
     "topicSlug": "materials-and-texturing",
     "publishedOrder": 80
@@ -399,6 +447,8 @@ window.TUTORIAL_DATA = [
       "Materials"
     ],
     "description": "Learn how to set up basic materials with image textures in Blender.",
+    "durationSeconds": 166,
+    "xp": 166,
     "youtubeId": "dExoV7ZD5R8",
     "topicSlug": "materials-and-texturing",
     "publishedOrder": 79
@@ -415,6 +465,8 @@ window.TUTORIAL_DATA = [
       "Materials"
     ],
     "description": "A short video that explains UV unwrapping and adding textures to your 3D models.",
+    "durationSeconds": 273,
+    "xp": 273,
     "youtubeId": "uCaAJanwrds",
     "topicSlug": "materials-and-texturing",
     "publishedOrder": 78
@@ -431,6 +483,8 @@ window.TUTORIAL_DATA = [
       "Beginner"
     ],
     "description": "Everything you need to get started with Grease Pencil — drawing, layers, strokes, and key tools.",
+    "durationSeconds": 363,
+    "xp": 363,
     "youtubeId": "inckC5b7zRk",
     "topicSlug": "blender-basics",
     "publishedOrder": 77

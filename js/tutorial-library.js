@@ -15,13 +15,14 @@
 
   function cardHTML(t) {
     const duration = t.duration ? `<span class="tut-duration">${esc(t.duration)}</span>` : '';
+    const xp = Number(t.xp || t.durationSeconds || 0);
     const tags = (t.tags || []).map(tag => `<span class="tut-tag">${esc(tag)}</span>`).join('');
-    return `<article class="tut-card" data-tutorial-id="${esc(t.id)}" data-difficulty="${esc((t.difficulty||'beginner').toLowerCase())}" data-topic="${esc(t.topicSlug || slugify(t.topic))}">
+    return `<article class="tut-card" data-tutorial-id="${esc(t.id)}" data-difficulty="${esc((t.difficulty||'beginner').toLowerCase())}" data-xp="${xp}" data-topic="${esc(t.topicSlug || slugify(t.topic))}">
       <button class="tut-thumb-link" type="button" data-video="${esc(t.youtubeId)}" aria-label="Play ${esc(t.title)}">
         <div class="tut-thumb"><img src="https://i.ytimg.com/vi/${esc(t.youtubeId)}/maxresdefault.jpg" onerror="this.src='https://i.ytimg.com/vi/${esc(t.youtubeId)}/mqdefault.jpg'" alt="${esc(t.title)}" loading="lazy"><div class="play-btn">▶</div>${duration}</div>
       </button>
       <div class="tut-meta"><div class="tut-tags">${tags}</div><div class="tut-title">${esc(t.title)}</div><p class="tut-excerpt">${esc(t.description || '')}</p>
-      <div class="tut-footer"><span>${t.duration ? '🕐 '+esc(t.duration) : esc(t.difficulty || '')}</span><button class="watch-link tutorial-watch-button" type="button">Watch →</button></div><button class="xp-complete-btn"></button></div>
+      <div class="tut-footer"><span>${t.duration ? '🕐 '+esc(t.duration) : esc(t.difficulty || '')}${xp ? ' · ⚡ '+xp.toLocaleString()+' XP' : ''}</span><button class="watch-link tutorial-watch-button" type="button">Watch →</button></div><button class="xp-complete-btn"></button></div>
     </article>`;
   }
 
@@ -31,13 +32,25 @@
     const filterHost = document.querySelector(`[data-topic-filters="${CSS.escape(section)}"]`);
     const countHost = document.querySelector(`[data-tutorial-count="${CSS.escape(section)}"]`);
     const topics = new Map();
-    tutorials.forEach(t => { const slug=t.topicSlug||slugify(t.topic); if(!topics.has(slug)) topics.set(slug,{name:t.topic, count:0}); topics.get(slug).count++; });
+    tutorials.forEach(t => { const slug=t.topicSlug||slugify(t.topic); if(!topics.has(slug)) topics.set(slug,{name:t.topic, count:0, xp:0}); topics.get(slug).count++; topics.get(slug).xp += Number(t.xp || t.durationSeconds || 0); });
     if (filterHost) {
-      filterHost.innerHTML = `<button class="filter-btn active" data-filter="all">All Tutorials <span>${tutorials.length}</span></button>` +
-        [...topics.entries()].map(([slug,info])=>`<button class="filter-btn" data-filter="${esc(slug)}">${esc(info.name)} <span>${info.count}</span></button>`).join('');
+      const totalXP = tutorials.reduce((sum,t)=>sum+Number(t.xp||t.durationSeconds||0),0);
+      filterHost.innerHTML = `<button class="filter-btn active" data-filter="all">All Tutorials <span>${tutorials.length} · ${totalXP.toLocaleString()} XP</span></button>` +
+        [...topics.entries()].map(([slug,info])=>`<button class="filter-btn" data-filter="${esc(slug)}">${esc(info.name)} <span>${info.count} · ${info.xp.toLocaleString()} XP</span></button>`).join('');
     }
     host.innerHTML = tutorials.length ? tutorials.map(cardHTML).join('') : '<p class="v2-empty-library">Tutorials will appear here as soon as a Markdown entry is added to <code>content/tutorials</code>.</p>';
     if (countHost) countHost.textContent = `${tutorials.length} tutorial${tutorials.length===1?'':'s'}`;
+    const summaryTarget = filterHost?.parentElement;
+    if (summaryTarget && !summaryTarget.querySelector('.tutorial-library-summary')) {
+      const summary = document.createElement('div');
+      summary.className = 'tutorial-library-summary';
+      const totalXP = tutorials.reduce((sum,t)=>sum+Number(t.xp||t.durationSeconds||0),0);
+      const totalSeconds = tutorials.reduce((sum,t)=>sum+Number(t.durationSeconds||0),0);
+      const hours = Math.floor(totalSeconds/3600);
+      const minutes = Math.floor((totalSeconds%3600)/60);
+      summary.innerHTML = `<strong>${tutorials.length}</strong> tutorials <span>•</span> <strong>${totalXP.toLocaleString()}</strong> XP available <span>•</span> <strong>${hours ? hours+'h ' : ''}${minutes}m</strong> learning time`;
+      filterHost.before(summary);
+    }
 
     const applyFilter = slug => {
       host.querySelectorAll('.tut-card').forEach(card => { card.hidden = slug !== 'all' && card.dataset.topic !== slug; });
