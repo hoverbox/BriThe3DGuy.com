@@ -70,7 +70,6 @@ function buildLatestCarousel() {
                onerror="this.src='https://i.ytimg.com/vi/${tut.id}/mqdefault.jpg'"
                alt="${tut.title}" loading="lazy">
           <div class="play-btn">▶</div>
-          <span class="tut-duration">${tut.duration}</span>
         </div>
       </a>
       <div class="tut-meta">

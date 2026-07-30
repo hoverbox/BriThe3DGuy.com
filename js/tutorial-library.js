@@ -35,8 +35,23 @@
     tutorials.forEach(t => { const slug=t.topicSlug||slugify(t.topic); if(!topics.has(slug)) topics.set(slug,{name:t.topic, count:0, xp:0}); topics.get(slug).count++; topics.get(slug).xp += Number(t.xp || t.durationSeconds || 0); });
     if (filterHost) {
       const totalXP = tutorials.reduce((sum,t)=>sum+Number(t.xp||t.durationSeconds||0),0);
+      const priorityTopics = {
+        '3D Graphics': ['Blender Basics', 'Modeling Tools', 'Modifiers', 'Materials & Texturing'],
+        'Game Development': ['Getting Started', 'Character Controllers', 'Logic Bricks']
+      };
+      const priority = priorityTopics[section] || [];
+      const orderedTopics = [...topics.entries()].sort((a,b) => {
+        const ai = priority.findIndex(name => slugify(name) === a[0]);
+        const bi = priority.findIndex(name => slugify(name) === b[0]);
+        if (ai !== -1 || bi !== -1) {
+          if (ai === -1) return 1;
+          if (bi === -1) return -1;
+          return ai - bi;
+        }
+        return a[1].name.localeCompare(b[1].name);
+      });
       filterHost.innerHTML = `<button class="filter-btn active" data-filter="all">All Tutorials <span>${tutorials.length} · ${totalXP.toLocaleString()} XP</span></button>` +
-        [...topics.entries()].map(([slug,info])=>`<button class="filter-btn" data-filter="${esc(slug)}">${esc(info.name)} <span>${info.count} · ${info.xp.toLocaleString()} XP</span></button>`).join('');
+        orderedTopics.map(([slug,info])=>`<button class="filter-btn" data-filter="${esc(slug)}">${esc(info.name)} <span>${info.count} · ${info.xp.toLocaleString()} XP</span></button>`).join('');
     }
     host.innerHTML = tutorials.length ? tutorials.map(cardHTML).join('') : '<p class="v2-empty-library">Tutorials will appear here as soon as a Markdown entry is added to <code>content/tutorials</code>.</p>';
     if (countHost) countHost.textContent = `${tutorials.length} tutorial${tutorials.length===1?'':'s'}`;

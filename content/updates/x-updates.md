@@ -4,7 +4,7 @@ updates:
   title: Featured update from BriThe3DGuy
   date: '2026-07-29'
   featured: true
-  x_post_url: 'https://x.com/BriThe3DGuy/status/2080786590662897715'
+  x_post_url: ''
   description: Follow @BriThe3DGuy on X for the latest tutorials, Logic Bricks releases, downloads, and project updates.
 ---
 

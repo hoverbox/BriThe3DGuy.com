@@ -1,18 +1,5 @@
 ---
 tutorials:
-- id: singing-pumpkin
-  title: How to Make a Singing Pumpkin
-  section: 3D Graphics
-  topic: Holiday
-  difficulty: Beginner
-  youtube: https://www.youtube.com/watch?v=2dGhDXe9n6k
-  duration: '14:43'
-  tags:
-  - Blender
-  - Beginner
-  - holiday
-  published_order: 101
-  description: Build, rig, and animated a singing pumpkin.
 - id: blender-ui
   title: Blender User Interface
   section: 3D Graphics
@@ -301,9 +288,7 @@ tutorials:
   - Beginner
   published_order: 77
   description: Everything you need to get started with Grease Pencil — drawing, layers, strokes, and key tools.
-
 ---
-
 
 # 3D Graphics Tutorials
 
