@@ -3,8 +3,8 @@ downloads:
 - id: pocket-guide-3d-graphics
   title: The Pocket Guide to 3D Graphics
   category: Guides
-  provider: Gumroad
-  url: https://brithe3dguy.gumroad.com/l/ucueq
+  provider: Ko-Fi
+  url: https://ko-fi.com/s/38d08e5ab1
   image: images/graphics_thumb.png
   tags:
   - 3D Graphics
